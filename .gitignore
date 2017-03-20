@@ -59,3 +59,7 @@ typings/
 
 # Mac OS
 .DS_Store
+
+# built bundle
+assets/scripts/*
+assets/styles/*
