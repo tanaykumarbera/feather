@@ -1,0 +1,24 @@
+{
+  parser: "babel-eslint",
+  parserOptions: {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  plugins: [
+    "react"
+  ],
+  extends: [
+  	"airbnb"
+  ],
+  globals: {
+    "document": true,
+    "window": true
+  },
+  rules: {
+  	"react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "max-len": [1, 120, 2, {ignoreComments: true}],
+    "comma-dangle": ["error", "never"]
+  }
+}
