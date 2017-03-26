@@ -1,6 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Router, browserHistory } from 'react-router';
 
-import Comp from './components/comp/comp';
+import reducers from './reducers';
+import routes from './routes';
 
-ReactDOM.render.render(<Comp name="Bla" />, document.querySelector('f-index'));
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+  , document.querySelector('.feather-contents'));
