@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, browserHistory } from 'react-router';
 
 import reducers from './reducers';
-import routes from './routes';
+import FRouter from './routes';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory} routes={routes} />
+    <FRouter />
   </Provider>
   , document.querySelector('.feather-contents'));

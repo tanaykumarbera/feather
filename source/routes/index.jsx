@@ -1,8 +1,17 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import Comp from '../components/comp';
+import FHome from '../containers/home';
 
-export default (
-  <Route path="/" component={Comp} />
-);
+const FRouter = () => {
+  const supportsHistory = 'pushState' in window.history;
+  return (
+    <BrowserRouter forceRefresh={!supportsHistory}>
+      <div className="feather-wrap">
+        <Route exact path="/" component={FHome} />
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default FRouter;

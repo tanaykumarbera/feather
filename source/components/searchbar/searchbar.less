@@ -1,0 +1,25 @@
+@bgColorDark: #F0F0F0;
+@colorDark: #AAAAAA;
+
+.f-searchbar {
+  width: 90vw;
+  max-width: 400px;
+  padding: 0.8em 1.4em;
+  margin: 2em 0px;
+  border: none !important;
+  border-radius: 5em;
+  text-align: left;
+  text-overflow: ellipsis;
+  outline: none;
+  cursor: text;
+  box-shadow: 0px 0px 3px 0px #ccc;
+  .f-icon {
+    float: right;
+  }
+}
+
+.f-searchbar.dark {
+  background: @bgColorDark;
+  color: @colorDark;
+  font-size: 1em;
+}

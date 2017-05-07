@@ -20,6 +20,7 @@
   	"react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "max-len": ["warn", 120, 2, {ignoreComments: true}],
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "no-nested-ternary": "off"
   }
 }

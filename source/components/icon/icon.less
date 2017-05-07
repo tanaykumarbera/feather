@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "feather-icons";
+  src:url("/assets/fonts/feather-icons.eot");
+  src:url("/assets/fonts/feather-icons.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/feather-icons.woff") format("woff"),
+    url("/assets/fonts/feather-icons.ttf") format("truetype"),
+    url("/assets/fonts/feather-icons.svg#feather-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.f-icon::before {
+  display: inline-block;
+  font-family: "feather-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { fetchPosts } from '../../actions';
 
-require('./comp.less');
+require('./base.less');
 
 class Comp extends React.Component {
   static propTypes = {
@@ -13,7 +13,9 @@ class Comp extends React.Component {
     isLoading: React.PropTypes.bool.isRequired
   }
   static defaultProps = {
-    children: ''
+    children: '',
+    fetchPosts: null,
+    isLoading: false
   }
   componentWillMount() {
     this.props.fetchPosts();
