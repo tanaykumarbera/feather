@@ -1,10 +1,10 @@
 import { FETCH_POST, LOADING, API_ERROR } from '../actions/index';
-import FEATHER_INITIAL from '../feather_initial';
+import INITIAL_STATE from '../feather_initial';
 
-export default function (currentState = FEATHER_INITIAL, action) {
+export default function (currentState = INITIAL_STATE.active, action) {
   switch (action.type) {
     case FETCH_POST:
-      return { ...currentState.active,
+      return { ...currentState,
         post: action.payload.posts[0],
         isLoading: false,
         hasError: false
@@ -12,7 +12,7 @@ export default function (currentState = FEATHER_INITIAL, action) {
     case LOADING:
     case API_ERROR:
       if (action.payload.kind === FETCH_POST) {
-        return { ...currentState.active,
+        return { ...currentState,
           isLoading: (action.type === LOADING),
           hasError: (action.type === API_ERROR)
         };
