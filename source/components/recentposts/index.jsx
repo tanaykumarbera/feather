@@ -1,6 +1,7 @@
 import React from 'react';
+import FIcon from '../icon';
 import PostListItem from '../postlistitem';
-// import { IconFont } from '../../utils';
+import { IconFont } from '../../utils';
 
 import './recentposts.less';
 
@@ -10,6 +11,11 @@ const RecentPosts = ({ postList }) => {
     {(!hasError && posts.length > 0) &&
       posts.map(post => (<PostListItem key={post.id} post={post} />))
     }
+    <FIcon
+      className="f-recent-more"
+      icon={IconFont.DOWN_ARROW}
+      url="/posts" link
+    />
   </div>);
 };
 
