@@ -16,8 +16,12 @@ export default class PostListItem extends React.Component {
       image: React.PropTypes.string,
       meta: React.PropTypes.string,
       tags: React.PropTypes.array
-    }).isRequired
-  }
+    })
+  };
+
+  static defaultProps = {
+    post: undefined
+  };
 
   static renderPost(post) {
     return (
@@ -52,7 +56,17 @@ export default class PostListItem extends React.Component {
   }
 
   static renderLoader() {
-    return (<h1>Loading</h1>);
+    return (<div className="f-post-list-item f-post-loading">
+      <div className="post-loader-mask-wrap" >
+        <div className="post-loader-mask mask-1" />
+        <div className="post-loader-mask mask-2-stub" />
+        <div className="post-loader-mask mask-2" />
+        <div className="post-loader-mask mask-3" />
+        <div className="post-loader-mask mask-4" />
+        <div className="post-loader-mask mask-5" />
+        <div className="post-loader-mask mask-6" />
+      </div>
+    </div>);
   }
 
   render() {
