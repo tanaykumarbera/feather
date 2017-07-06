@@ -1,29 +1,44 @@
 import React from 'react';
 
+import PostListItem from '../postlistitem';
+
 import './autotriggerpostlist.less';
 
 class AutoTriggerPostList extends React.Component {
 
-  static postType = {
-    author: React.PropTypes.shape({
-      user: React.PropTypes.object,
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
-    }).isRequired
+  static propTypes = {
+    posts: React.PropTypes.arrayOf(React.PropTypes.shape({
+      title: React.PropTypes.string,
+      image: React.PropTypes.string,
+      meta: React.PropTypes.string,
+      tags: React.PropTypes.array
+    })).isRequired,
+    isLoading: React.PropTypes.bool.isRequired,
+    trigger: React.PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.onScroll = this.onScroll.bind(this);
+    this.renderLoaderIfLoading = this.renderLoaderIfLoading.bind(this);
   }
 
   onScroll() {
     console.log(this);
   }
 
+  trigger() {
+    this.props.trigger();
+  }
+
+  renderLoaderIfLoading() {
+    return this.props.isLoading ? (<PostListItem key="loading" />) : '';
+  }
+
   render() {
     return (<div className="f-post-container" onScroll={this.onScroll}>
-      { 'Post List' }
+      { this.props.posts.map(post => (<PostListItem key={post.id} post={post} />)) }
+      { this.renderLoaderIfLoading() }
     </div>);
   }
 }
