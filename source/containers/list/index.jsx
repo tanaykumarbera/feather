@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import FLoader from '../../components/fullpageloader';
 import SideBarPage from '../../components/sidebarpage';
 import AutoTriggerPostList from '../../components/autotriggerpostlist';
 
@@ -87,9 +86,7 @@ class FList extends React.Component {
   render() {
     const { posts, isLoading } = this.props.postList;
     return (<SideBarPage author={this.props.author}>
-      { isLoading ? (<FLoader mode="half" />) : (
-        <AutoTriggerPostList trigger={this.triggerNext} posts={posts} />
-      )}
+      <AutoTriggerPostList trigger={this.triggerNext} posts={posts} isLoading={isLoading} />
     </SideBarPage>);
   }
 }
