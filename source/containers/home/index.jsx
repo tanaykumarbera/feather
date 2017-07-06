@@ -57,7 +57,7 @@ class FHome extends React.Component {
           <FIcon theme="f-dark" icon={IconFont.GITHUB} />
           <FIcon theme="f-dark" icon={IconFont.INSTAGRAM} />
         </div>
-        <RecentPosts postList={this.props.postList} />
+        <RecentPosts postList={this.props.postList} minPlaceholder={5} />
         <footer>Tanay Kumar <span>Bera</span></footer>
       </div>
     </div>);
