@@ -37,20 +37,22 @@ export default class PostListItem extends React.Component {
             })
           }}
         />
-        <div className="post-tags">
-          <div className="post-tags-icon">
-            <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
-          </div>
-          {post.tags.length > 0 &&
-            <div className="post-tags-container">
-              {post.tags.map(tag => (
-                <Link key={tag.id} className="post-tag" to={`/${tag.slug}`}>
-                  { `#${tag.name}` }
-                </Link>)
-              )}
+        {post.tags && (
+          <div className="post-tags">
+            <div className="post-tags-icon">
+              <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
             </div>
-          }
-        </div>
+            {post.tags.length > 0 &&
+              <div className="post-tags-container">
+                {post.tags.map(tag => (
+                  <Link key={tag.id} className="post-tag" to={`/${tag.slug}`}>
+                    { `#${tag.name}` }
+                  </Link>)
+                )}
+              </div>
+            }
+          </div>
+        )}
       </div>
     );
   }
