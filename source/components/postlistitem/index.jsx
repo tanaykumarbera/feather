@@ -1,6 +1,6 @@
 import React from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { Link } from 'react-router-dom';
+import FTag from '../tag';
 import FIcon from '../icon';
 import { IconFont } from '../../utils';
 
@@ -44,11 +44,7 @@ export default class PostListItem extends React.Component {
             </div>
             {post.tags.length > 0 &&
               <div className="post-tags-container">
-                {post.tags.map(tag => (
-                  <Link key={tag.id} className="post-tag" to={`/${tag.slug}`}>
-                    { `#${tag.name}` }
-                  </Link>)
-                )}
+                {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
               </div>
             }
           </div>
