@@ -36,8 +36,9 @@ class AutoTriggerPostList extends React.Component {
   }
 
   render() {
-    return (<div className="f-post-container" onScroll={this.onScroll}>
+    return (<div className="f-auto-post-container" onScroll={this.onScroll}>
       { this.props.posts.map(post => (<PostListItem key={post.id} post={post} />)) }
+      <PostListItem key="loading" />
       { this.renderLoaderIfLoading() }
     </div>);
   }
