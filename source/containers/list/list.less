@@ -1,1 +1,40 @@
+@import "../../utils/global.less";
 
+.f-list-head {
+  height: 240px;
+  background: url('/assets/images/f-pattern.png') repeat;
+  background-size: 20%;
+  position: relative;
+  margin: 1em 1em -1em;
+  position: relative;
+  &:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    //background: linear-gradient(to top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) 25%, transparent 50%);
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9) 25%, transparent 50%);
+  }
+  nav {
+    font-weight: bold;
+    color: @primaryColor;
+    margin: 0 1em;
+    bottom: 1em;
+    position: absolute;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .f-nav-home {
+      .f-icon {
+        top: 0.18em;
+        position: relative;
+        margin-right: 0.2em;
+        font-size: 1.2em;
+      }
+    }
+  }
+}

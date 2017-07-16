@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import FIcon from '../../components/icon';
 import SideBarPage from '../../components/sidebarpage';
 import AutoTriggerPostList from '../../components/autotriggerpostlist';
-
+import { IconFont } from '../../utils';
 import { fetchPosts } from '../../actions';
 
 import './list.less';
@@ -85,7 +87,27 @@ class FList extends React.Component {
 
   render() {
     const { posts, isLoading } = this.props.postList;
+    const isTag = this.type === FList.Type.TAGS;
     return (<SideBarPage author={this.props.author}>
+      <div className="f-list-head">
+        <nav>
+          <Link
+            to="/"
+            className="f-nav-home"
+          >
+            <FIcon theme="f-dark" icon={IconFont.HOME} />
+            HOME
+          </Link>
+          { ' » ' }
+          { isTag && (<Link to="/tags" className="f-nav-tags">
+              tags
+          </Link>)}
+          { isTag && ' » ' }
+          <span className="f-nav-active">
+            { isTag ? `#${this.match.params.slug}` : 'Archieve' }
+          </span>
+        </nav>
+      </div>
       <AutoTriggerPostList trigger={this.triggerNext} posts={posts} isLoading={isLoading} />
     </SideBarPage>);
   }
