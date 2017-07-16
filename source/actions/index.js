@@ -35,8 +35,11 @@ export function fetchHomeContents() {
   };
 }
 
-export function fetchPosts(limit = '5') {
-  const request = axios.get(ghost.url.api('posts', { limit }));
+export function fetchPosts(limit = '5', extras = null) {
+  const request = axios.get(ghost.url.api('posts', { limit,
+    include: 'tags',
+    fields: 'id,title,slug,image,tags,html',
+    ...(extras !== null ? extras : {}) }));
   return (dispatch) => {
     dispatch({
       type: LOADING,

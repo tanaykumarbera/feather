@@ -1,0 +1,18 @@
+@import "../../utils/global.less";
+
+@tagHoverBg: #F0F0F0;
+
+.post-tag-wrap {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  margin: 0 0.1em;
+  border-radius: 1px;
+  &:hover {
+    background: @tagHoverBg;
+  }
+  .post-tag {
+    color: @primaryColor;
+    display: inline-block;
+    text-decoration: none;
+  }
+}

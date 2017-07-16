@@ -3,6 +3,11 @@
 @lineHeight: 1.2em;
 @exerptMaxLines: 3;
 @postExcerptHeight: (@lineHeight * @exerptMaxLines);
+@loaderBgColor: #eee;
+@loaderHighlight: #ddd;
+
+@featureWidth: 208px;
+
 .f-post-list-item {
   width: 100%;
   height: auto;
@@ -11,8 +16,11 @@
   box-sizing: border-box;
   padding: 16px;
   box-shadow: 0px 1px 0px 0px @listDividerColor;
+  &:last-child {
+    box-shadow: none;
+  }
   .post-feature {
-    width: 208px;
+    width: @featureWidth;
     height: auto;
     float: right;
   }
@@ -23,11 +31,13 @@
   .post-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 2em;
+    font-size: 1.8em;
+    line-height: 1.2em;
     color: @fontColor;
   }
   .post-excerpt {
-    margin: 1em 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
     font-size: 1em;
     color: @fontColorLight;
     word-wrap: break-word;
@@ -35,6 +45,7 @@
     line-height: @lineHeight;
     max-height: @postExcerptHeight;
     p {
+      text-align: justify;
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
     }
@@ -50,11 +61,62 @@
       margin-left: 2.4em;
       padding-top: 0.64em;
     }
-    .post-tag {
-      color: inherit;
-      display: inline-block;
-      padding: 2px 5px;
-      margin: 0px 8px;
-    }
   }
+}
+
+.f-post-list-item.f-post-loading {
+  padding: 0px;
+  border: 1em solid white;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: loadingAnimation;
+  animation-timing-function: ease;
+  background-color: @loaderBgColor;
+  background-image: linear-gradient(to right,  @loaderBgColor 2%, @loaderHighlight 18%, @loaderBgColor 33%);
+  background-repeat: no-repeat;
+  .post-loader-mask-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-width: 0.4em 1em 0.4em 0;
+    border-color: white;
+    border-style: solid;
+    right: @featureWidth;
+  }
+  .post-loader-mask {
+    position: relative;
+    background: white;
+  }
+  .mask-1, .mask-2 {
+    margin-top: 1.4em;
+    height: 0.6em;
+  }
+  .mask-2 {
+    height: 1.2em;
+  }
+  .mask-2-stub {
+    float: right;
+    height: 1.4em;
+    width: 30%;
+  }
+  .mask-3, .mask-4, .mask-5 {
+    margin-top: 0.4em;
+    height: 0.4em;
+  }
+  .mask-5 {
+    height: 0.8em;
+  }
+  .mask-6 {
+    margin-left: 2em;
+    border: 0.6em solid white;
+    height: 0.8em;
+    background: transparent;
+    border-right: none;
+  }
+}
+
+@keyframes loadingAnimation {
+  100% { background-position: 100vw 0 }
 }
