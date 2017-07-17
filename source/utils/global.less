@@ -1,5 +1,6 @@
 @bgShapeColor: #F0F0F0;
 @primaryColor: #6F40F2;
+@titleColor: #202020;
 @fontColor: #303030;
 @fontColorLight: #999;
 @fontColorLighter: #AAA;
@@ -19,6 +20,11 @@ html, body, .feather-wrap, .feather-contents, .f-page {
 
 .light {
   color: white;
+}
+
+::selection {
+  color: white;
+  background: fade(@primaryColor, 95%);
 }
 
 /* Material ink ripple effect
