@@ -57,7 +57,9 @@ export function fetchPosts(limit = '5', extras = null) {
 }
 
 export function fetchPost(slug) {
-  const request = axios.get(ghost.url.api('posts', { slug }));
+  const request = axios.get(ghost.url.api(`posts/slug/${slug}`, {
+    include: 'tags'
+  }));
   return (dispatch) => {
     dispatch({
       type: LOADING,
