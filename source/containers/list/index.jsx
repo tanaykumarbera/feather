@@ -24,6 +24,11 @@ class FList extends React.Component {
     location: React.PropTypes.shape({
       pathname: React.PropTypes.string
     }).isRequired,
+    match: React.PropTypes.shape({
+      params: React.PropTypes.shape({
+        slug: React.PropTypes.string
+      })
+    }).isRequired,
     author: React.PropTypes.shape({
       user: React.PropTypes.object,
       isLoading: React.PropTypes.bool,
@@ -66,13 +71,13 @@ class FList extends React.Component {
       case FList.Type.TAGS:
         this.props.fetchPosts(10, {
           // extra should be a tag slug
-          filter: `tags:${this.match.params.slug}`
+          filter: `tags:${this.props.match.params.slug}`
         });
         break;
       case FList.Type.AUTHOR:
         this.props.fetchPosts(10, {
           // extra should be an author slug
-          filter: `author:${this.match.params.slug}`
+          filter: `author:${this.props.match.params.slug}`
         });
         break;
       case FList.Type.POSTS:
