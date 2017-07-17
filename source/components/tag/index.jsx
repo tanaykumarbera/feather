@@ -7,6 +7,7 @@ import './tag.less';
 
 export default class FTag extends React.Component {
 
+  static LINK_DELAY = 650; // same as that of animation
   static propTypes = {
     tag: React.PropTypes.shape({
       name: React.PropTypes.string,
@@ -28,14 +29,22 @@ export default class FTag extends React.Component {
   }
 
   onClick(event) {
-    console.log('Click');
-    event.preventDefault();
     if (this.domInstance) {
       // diable rule, because Link is not in our territory and we need
       // dom element of anchor used to create ripple
       // eslint-disable-next-line react/no-find-dom-node
       const domElement = ReactDOM.findDOMNode(this.domInstance);
-      if (domElement) generateInkRipple(domElement, event);
+      if (!domElement) return;
+      if (domElement.getAttribute('clicked')) {
+        domElement.removeAttribute('clicked');
+      } else {
+        event.preventDefault();
+        domElement.setAttribute('clicked', true);
+        generateInkRipple(domElement, event);
+        setTimeout(() => {
+          domElement.querySelector('a').click();
+        }, FTag.LINK_DELAY);
+      }
     }
     if (this.props.onClick) {
       this.props.onClick();
@@ -50,7 +59,7 @@ export default class FTag extends React.Component {
     >
       <Link
         id={this.domId}
-        to={`/${tag.slug}`}
+        to={`/tag/${tag.slug}`}
         onClick={this.onClick}
         className="post-tag"
       >
