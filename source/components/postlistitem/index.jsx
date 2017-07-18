@@ -28,7 +28,7 @@ export default class PostListItem extends React.Component {
     return (
       <div className="f-post-list-item">
         <img src={post.image || src} className="post-feature" alt="" />
-        <Link to={post.slug} ><h2 className="post-title">{ post.title }</h2></Link>
+        <Link to={`/${post.slug}`} ><h2 className="post-title">{ post.title }</h2></Link>
         <div
           className="post-excerpt"
           // eslint-disable-next-line react/no-danger

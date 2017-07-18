@@ -52,11 +52,38 @@ class FPost extends React.Component {
 
   static allowedTags = [
     'p', 'b', 'i', 'strong', 'a', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'sub', 'sup', 'blockquote', 'pre'
+    'sub', 'sup', 'blockquote', 'pre', 'iframe'
   ]
 
   componentWillMount() {
     this.props.fetchPost(this.props.match.params.slug);
+  }
+
+  componentDidUpdate() {
+    if (!this.hasDisqus) {
+      const { post, isLoading } = this.props.active;
+      const postLoaded = !(isLoading || post === null);
+      if (postLoaded) {
+        this.addDisqus(`/${post.slug}`, post.uuid);
+        this.hasDisqus = true;
+      }
+    }
+  }
+
+  addDisqus(pageUrl, pageIdentifier) {
+    window.disqus_config = () => {
+      this.page.url = pageUrl;
+      this.page.identifier = pageIdentifier;
+    };
+    const disqusScript = document.createElement('script');
+    disqusScript.src = 'https://thehandpickers.disqus.com/embed.js';
+    disqusScript.setAttribute('data-timestamp', +new Date());
+    disqusScript.async = true;
+
+    const disqusDiv = document.getElementById('disqus_thread');
+    if (disqusDiv) {
+      disqusDiv.appendChild(disqusScript);
+    }
   }
 
   render() {
@@ -77,6 +104,7 @@ class FPost extends React.Component {
             })
           }}
         />
+        <div id="disqus_thread" className="f-post-comment" />
       </div>
     </SideBarPage>);
   }
