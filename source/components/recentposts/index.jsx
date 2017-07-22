@@ -5,8 +5,8 @@ import { IconFont } from '../../utils';
 
 import './recentposts.less';
 
-const RecentPosts = ({ postList, minPlaceholder }) => {
-  const { posts, hasError, isLoading } = postList;
+const RecentPosts = ({ recent, minPlaceholder }) => {
+  const { posts, hasError, isLoading } = recent;
   return (<div className="f-recent-posts-wrap">
     {isLoading &&
       [...Array(minPlaceholder)].map(num => (<PostListItem key={num} />))
@@ -23,7 +23,7 @@ const RecentPosts = ({ postList, minPlaceholder }) => {
 };
 
 RecentPosts.propTypes = {
-  postList: React.PropTypes.shape({
+  recent: React.PropTypes.shape({
     posts: React.PropTypes.array,
     hasError: React.PropTypes.bool
   }).isRequired,

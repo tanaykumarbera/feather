@@ -24,7 +24,7 @@ class FHome extends React.Component {
       isLoading: React.PropTypes.bool,
       hasError: React.PropTypes.bool
     }).isRequired,
-    postList: React.PropTypes.shape({
+    recent: React.PropTypes.shape({
       posts: React.PropTypes.array,
       isLoading: React.PropTypes.bool,
       hasError: React.PropTypes.bool
@@ -36,7 +36,7 @@ class FHome extends React.Component {
   }
 
   render() {
-    const { posts } = this.props.postList;
+    const { posts } = this.props.recent;
     const { user } = this.props.author;
     const loaded = (posts.length > 0 && user !== null);
     if (!loaded) {
@@ -57,7 +57,7 @@ class FHome extends React.Component {
           <FIcon theme="f-dark" icon={IconFont.GITHUB} />
           <FIcon theme="f-dark" icon={IconFont.INSTAGRAM} />
         </div>
-        <RecentPosts postList={this.props.postList} minPlaceholder={5} />
+        <RecentPosts recent={this.props.recent} minPlaceholder={5} />
         <footer>Tanay Kumar <span>Bera</span></footer>
       </div>
     </div>);
