@@ -12,7 +12,8 @@ export default function (currentState = INITIAL_STATE.active, action) {
     case LOADING:
     case API_ERROR:
       if (action.payload.kind === FETCH_POST) {
-        return { ...currentState,
+        return {
+          post: null,
           isLoading: (action.type === LOADING),
           hasError: (action.type === API_ERROR)
         };

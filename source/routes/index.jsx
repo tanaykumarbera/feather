@@ -12,8 +12,11 @@ const FRouter = () => {
       <div className="feather-wrap">
         <Switch>
           <Route exact path="/" component={FHome} />
-          <Route path="/tag/:slug" component={FList} />
-          <Route path="/posts" component={FList} />
+          <Route path="/posts" component={FList} bla="blue" />
+          <Route
+            path="/tag/:slug"
+            render={routeProps => <FList {...routeProps} type="tags" />}
+          />
           <Route path="/:slug" component={FPost} />
         </Switch>
       </div>

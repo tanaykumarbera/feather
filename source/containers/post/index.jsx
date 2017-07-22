@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 
 import FIcon from '../../components/icon';
+import FLoader from '../../components/fullpageloader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
 import { IconFont } from '../../utils';
@@ -88,7 +89,10 @@ class FPost extends React.Component {
 
   render() {
     const { post, isLoading } = this.props.active;
-    return (isLoading || post === null) ? (<h1>Loading</h1>) : (<SideBarPage author={this.props.author}>
+    if (isLoading || post === null) {
+      return (<FLoader />);
+    }
+    return (<SideBarPage author={this.props.author}>
       <div className="f-post-wrap">
         <h1 className="f-post-title">{post.title}</h1>
         { post.tags && (<div className="f-post-tags">
