@@ -35,21 +35,31 @@ export function fetchHomeContents() {
   };
 }
 
-export function fetchPosts(limit = '5', extras = null) {
+export function fetchPosts(limit = 10, extras = null, identifier = null) {
+  /**
+  * Cannot use filter and field together. Known issue in Ghost API
+  * https://github.com/TryGhost/Ghost/issues/8649
+  * fields: 'id,title,slug,image,tags,html',
+  */
   const request = axios.get(ghost.url.api('posts', { limit,
     include: 'tags',
-    fields: 'id,title,slug,image,tags,html',
     ...(extras !== null ? extras : {}) }));
   return (dispatch) => {
     dispatch({
       type: LOADING,
-      payload: { kind: FETCH_POSTS }
+      identifier,
+      payload: { kind: FETCH_POSTS, extras }
     });
     request.then(({ data }) => {
-      dispatch({ type: FETCH_POSTS, payload: data });
+      setTimeout(() => dispatch({
+        type: FETCH_POSTS,
+        identifier,
+        payload: data,
+        extras }), 2000);
     }).catch((error) => {
       dispatch({
         type: API_ERROR,
+        identifier,
         payload: { kind: FETCH_POSTS, error }
       });
     });
