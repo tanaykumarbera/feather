@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 import FTag from '../tag';
 import FIcon from '../icon';
@@ -27,7 +28,7 @@ export default class PostListItem extends React.Component {
     return (
       <div className="f-post-list-item">
         <img src={post.image || src} className="post-feature" alt="" />
-        <h2 className="post-title">{ post.title }</h2>
+        <Link to={`/${post.slug}`} ><h2 className="post-title">{ post.title }</h2></Link>
         <div
           className="post-excerpt"
           // eslint-disable-next-line react/no-danger

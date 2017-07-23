@@ -38,3 +38,25 @@
     }
   }
 }
+
+.f-list-content {
+  padding: 1em;
+  .f-post-loading {
+    /* to allow box shadow of previous div,
+     assuming loader always at last */
+    margin-top: 1px;
+  }
+  .f-post-list-item {
+    top: 0;
+    opacity: 1;
+    transition: opacity 50ms ease-in, top 50ms ease-in;
+  }
+  .f-list-item-enter {
+    top: 1em;
+    opacity: 0;
+    &&-active {
+      top: 0em;
+      opacity: 1;
+    }
+  }
+}

@@ -11,7 +11,16 @@ export default (window && window.__FEATHER_INITIAL__ !== undefined) ?
       isLoading: false,
       hasError: false
     },
-    postList: {
+    list: {
+      posts: [],
+      identifier: null,
+      totalPages: 0,
+      pageLoaded: 0,
+      hasMore: true,
+      isLoading: false,
+      hasError: false
+    },
+    recent: {
       posts: [],
       isLoading: false,
       hasError: false
