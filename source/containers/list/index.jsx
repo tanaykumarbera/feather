@@ -55,6 +55,7 @@ class FList extends React.Component {
 
   constructor(props) {
     super(props);
+    this.type = props.type;
     this.triggerNext = this.triggerNext.bind(this);
     this.fetchContents = this.fetchContents.bind(this);
   }
@@ -66,13 +67,14 @@ class FList extends React.Component {
   componentWillReceiveProps(newProps) {
     if (this.props.match.params.slug !== newProps.match.params.slug) {
       // check for url change. If changed reload contents for new url
+      this.type = newProps.type;
       this.fetchContents(0, newProps.match.params.slug);
     }
   }
 
   fetchContents(page = 0, slug = null) {
     const fSlug = slug || this.props.match.params.slug;
-    switch (this.props.type) {
+    switch (this.type) {
       case FList.Type.TAGS:
         // extra should be a tag slug
         this.props.fetchPosts(10, {
@@ -101,7 +103,7 @@ class FList extends React.Component {
 
   render() {
     const { posts, isLoading, hasMore } = this.props.list;
-    const isTag = this.props.type === FList.Type.TAGS;
+    const isTag = this.type === FList.Type.TAGS;
     return (<SideBarPage author={this.props.author}>
       <AutoTriggerScroll
         trigger={this.triggerNext}
@@ -128,15 +130,14 @@ class FList extends React.Component {
           </nav>
         </div>
         <ReactCSSTransitionGroup
+          key={isTag ? `f-${this.props.match.params.slug}` : 'f-archive'}
           component="div"
           className="f-list-content"
           transitionName="f-list-item"
-          transitionAppear
           transitionAppearTimeout={500}
           transitionEnter
           transitionEnterTimeout={500}
-          transitionLeave
-          transitionLeaveTimeout={10}
+          transitionLeave={false}
         >
           { posts.map(post => <PostListItem key={post.id} post={post} />) }
           { ((!posts.length && isLoading) || hasMore) && <PostListItem key="loading" /> }
