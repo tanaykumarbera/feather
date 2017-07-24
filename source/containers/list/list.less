@@ -37,6 +37,23 @@
       }
     }
   }
+  .DEVICE_LAPTOPS({
+    height: 164px;
+  });
+  .DEVICE_TABLETS({
+    background: white;
+    border-top: 0.6em solid @primaryColor;
+    height: auto;
+    margin: 0;
+    padding-top: 2em;
+    padding-left: 1em;
+    &::before {
+      display: none;
+    }
+    nav {
+      position: relative;
+    }
+  });
 }
 
 .f-list-content {

@@ -1,3 +1,5 @@
+@import "../../utils/global.less";
+
 .f-sidebar-page {
   .f-sidebar {
     width: 24em;
@@ -6,4 +8,20 @@
     margin-left: 24em;
     height: 100%;
   }
+  .DEVICE_LAPTOPS({
+    .f-sidebar {
+      width: 20em;
+    }
+    .f-sp-contents {
+      margin-left: 20em;
+    }
+  });
+  .DEVICE_TABLETS({
+    .f-sidebar {
+      display: none;
+    }
+    .f-sp-contents {
+      margin-left: 0em;
+    }
+  });
 }
