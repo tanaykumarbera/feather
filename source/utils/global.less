@@ -51,3 +51,27 @@ html, body, .feather-wrap, .feather-contents, .f-page {
     transform: scale(2.5);
   }
 }
+
+.DEVICE_XTRALARGER(@rules) {
+  @media (orientation: landscape) and (min-width : 1824px) { @rules(); }
+}
+
+.DEVICE_DESKTOPS(@rules) {
+  @media (orientation: landscape) and (max-width: 1824px) { @rules(); }
+}
+
+.DEVICE_LAPTOPS(@rules) {
+  @media (orientation: landscape) and (max-width: 1224px) { @rules(); }
+}
+
+.DEVICE_TABLETS(@rules) {
+  @media (orientation: landscape) and (max-width: 1024px) { @rules(); }
+}
+
+.DEVICE_PORTRAIT(@rules) {
+  @media (orientation: portrait) or (max-width: 986px) { @rules(); }
+}
+
+.DEVICE_SMALL(@rules) {
+  @media (max-width: 800px) { @rules(); }
+}
