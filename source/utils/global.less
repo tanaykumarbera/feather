@@ -53,25 +53,29 @@ html, body, .feather-wrap, .feather-contents, .f-page {
 }
 
 .DEVICE_XTRALARGER(@rules) {
-  @media (orientation: landscape) and (min-width : 1824px) { @rules(); }
+  @media (min-width : 1824px) { @rules(); }
 }
 
 .DEVICE_DESKTOPS(@rules) {
-  @media (orientation: landscape) and (max-width: 1824px) { @rules(); }
+  @media (max-width: 1824px) { @rules(); }
 }
 
 .DEVICE_LAPTOPS(@rules) {
-  @media (orientation: landscape) and (max-width: 1224px) { @rules(); }
+  @media (max-width: 1224px) { @rules(); }
 }
 
 .DEVICE_TABLETS(@rules) {
-  @media (orientation: landscape) and (max-width: 1024px) { @rules(); }
+  @media (max-width: 1024px) { @rules(); }
 }
 
 .DEVICE_PORTRAIT(@rules) {
-  @media (orientation: portrait) or (max-width: 986px) { @rules(); }
+  @media (orientation: portrait), (max-width: 986px) { @rules(); }
 }
 
 .DEVICE_SMALL(@rules) {
   @media (max-width: 800px) { @rules(); }
+}
+
+.DEVICE_MOBILE(@rules) {
+  @media (max-width: 480px) { @rules(); }
 }

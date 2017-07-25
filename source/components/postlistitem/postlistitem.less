@@ -6,8 +6,6 @@
 @loaderBgColor: #eee;
 @loaderHighlight: #ddd;
 
-@featureWidth: 208px;
-
 .f-post-list-item {
   width: 100%;
   height: auto;
@@ -16,17 +14,33 @@
   box-sizing: border-box;
   padding: 16px;
   box-shadow: 0px 1px 0px 0px @listDividerColor;
+  .DEVICE_LAPTOPS({
+    min-height: 144px;
+  });
   &:last-child {
     box-shadow: none;
   }
   .post-feature {
-    width: @featureWidth;
+    width: 208px;
     height: auto;
     float: right;
+    .DEVICE_LAPTOPS({
+      width: 160px;
+    });
+    .DEVICE_MOBILE({
+      float: none;
+      width: 100%;
+    });
   }
   .post-title, .post-excerpt, .post-tags {
     margin-right: 224px;
     text-align: left;
+    .DEVICE_LAPTOPS({
+      margin-right: 176px;
+    });
+    .DEVICE_MOBILE({
+      margin-right: 0;
+    });
   }
   .post-title {
     margin-top: 0px;
@@ -34,6 +48,16 @@
     font-size: 1.8em;
     line-height: 1.2em;
     color: @fontColor;
+    .DEVICE_LAPTOPS({
+      font-size: 1.6em;
+    });
+    .DEVICE_LAPTOPS({
+      font-size: 1.24em;
+    });
+    .DEVICE_MOBILE({
+      font-size: 1.2em;
+      margin-top: 1em;
+    });
   }
   .post-excerpt {
     margin-top: 1em;
@@ -49,6 +73,13 @@
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
     }
+    .DEVICE_LAPTOPS({
+      margin-top: 0.6em;
+      margin-bottom: 0.6em;
+    });
+    .DEVICE_LAPTOPS({
+      font-size: 0.84em;
+    });
   }
   .post-tags {
     color: @primaryColor;
@@ -56,10 +87,18 @@
     .post-tags-icon {
       font-size: 2.4em;
       float: left;
+      .DEVICE_LAPTOPS({
+        font-size: 1.4em;
+      });
     }
     .post-tags-container {
       margin-left: 2.4em;
       padding-top: 0.64em;
+      .DEVICE_LAPTOPS({
+        font-size: 0.9em;
+        margin-left: 1.4em;
+        padding-top: 0.2em;
+      });
     }
   }
 }
@@ -83,7 +122,10 @@
     border-width: 0.4em 1em 0.4em 0;
     border-color: white;
     border-style: solid;
-    right: @featureWidth;
+    right: 208px;
+    .DEVICE_LAPTOPS({
+      right: 160px;
+    });
   }
   .post-loader-mask {
     position: relative;
