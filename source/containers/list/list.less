@@ -1,7 +1,7 @@
 @import "../../utils/global.less";
 
 .f-list-head {
-  height: 240px;
+  height: 224px;
   background: url('/assets/images/f-pattern.png') repeat;
   background-size: 20%;
   position: relative;
@@ -40,7 +40,7 @@
   .DEVICE_LAPTOPS({
     height: 164px;
   });
-  .DEVICE_TABLETS({
+  .DEVICE_SMALL({
     background: white;
     border-top: 0.6em solid @primaryColor;
     height: auto;
@@ -52,6 +52,7 @@
     }
     nav {
       position: relative;
+      margin: 0;
     }
   });
 }
@@ -76,4 +77,7 @@
       opacity: 1;
     }
   }
+  .DEVICE_SMALL({
+    padding: 0;
+  });
 }
