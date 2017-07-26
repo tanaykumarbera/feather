@@ -6,10 +6,10 @@ import './sidebarpage.less';
 
 const SideBarPage = ({ author, children }) => (
   <div className="f-page f-sidebar-page">
-    <SideBar author={author} />
     <div className="f-sp-contents">
       { children }
     </div>
+    <SideBar author={author} />
   </div>
 );
 
