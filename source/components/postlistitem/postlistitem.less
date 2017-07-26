@@ -104,6 +104,7 @@
 }
 
 .f-post-list-item.f-post-loading {
+  height: 12em;
   padding: 0px;
   border: 1em solid white;
   animation-duration: 1s;
@@ -126,6 +127,11 @@
     .DEVICE_LAPTOPS({
       right: 160px;
     });
+    .DEVICE_MOBILE({
+        right: 0;
+        top: 16em;
+        border-width: 0.6em 1em 0.4em 0;
+    })
   }
   .post-loader-mask {
     position: relative;
@@ -157,6 +163,9 @@
     background: transparent;
     border-right: none;
   }
+  .DEVICE_MOBILE({
+    height: 28em;
+  });
 }
 
 @keyframes loadingAnimation {
