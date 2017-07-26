@@ -17,11 +17,18 @@
     }
   });
   .DEVICE_PORTRAIT({
-    .f-sidebar {
-      display: none;
-    }
     .f-sp-contents {
       margin-left: 0em;
+      height: auto;
+      min-height: 100%;
+      padding-bottom: 2em;
+    }
+    .f-sidebar {
+      width: 100%;
+      position: relative;
+      .f-icons-container {
+        margin-bottom: 2em;
+      }
     }
   });
 }
