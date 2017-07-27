@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const AuthorBio = ({ author, theme }) => (
   <p className={`f-author-bio ${theme}`}>
-    { author.user.bio }
+    { author.user && author.user.bio }
   </p>
 );
 

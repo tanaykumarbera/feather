@@ -5,7 +5,8 @@
   left: 0;
   top: 0;
   bottom: 0;
-  height: auto;
+  height: 100%;
+  display: table;
   background: url(/assets/images/sidebar-bg.png) center;
   background-size: cover;
 }
@@ -14,6 +15,8 @@
   position: relative;
   width: 100%;
   height: 100%;
+  display: table-cell;
+  vertical-align: middle;
   background: fade(@primaryColor, 80%);
   margin: 0;
   padding: 1em;
@@ -23,7 +26,6 @@
   .f-sitelogo {
     font-size: 8em;
     height: 1em;
-    margin-top: 0.5em;
     padding-right: 6%;
   }
 

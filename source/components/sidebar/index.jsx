@@ -11,16 +11,18 @@ import './sidebar.less';
 
 const SideBar = ({ author }) => (
   <div className="f-sidebar">
-    <div className="fs-contents">
-      <SiteLogo theme="light" />
-      <AuthorBio author={author} theme="light" />
-      <SearchBar theme="light" />
-      <div className="f-icons-container">
-        <FIcon theme="f-light" icon={IconFont.TWITTER} />
-        <FIcon theme="f-light" icon={IconFont.GITHUB} />
-        <FIcon theme="f-light" icon={IconFont.INSTAGRAM} />
+    { author.user && (
+      <div className="fs-contents">
+        <SiteLogo theme="light" />
+        <AuthorBio author={author} theme="light" />
+        <SearchBar theme="light" />
+        <div className="f-icons-container">
+          <FIcon theme="f-light" icon={IconFont.TWITTER} />
+          <FIcon theme="f-light" icon={IconFont.GITHUB} />
+          <FIcon theme="f-light" icon={IconFont.INSTAGRAM} />
+        </div>
       </div>
-    </div>
+    )}
   </div>
 );
 
