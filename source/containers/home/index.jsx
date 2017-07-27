@@ -8,6 +8,7 @@ import AuthorBio from '../../components/authorbio';
 import SearchBar from '../../components/searchbar';
 import RecentPosts from '../../components/recentposts';
 import FIcon from '../../components/icon';
+import FSearch from '../search';
 
 import { IconFont } from '../../utils';
 
@@ -31,8 +32,20 @@ class FHome extends React.Component {
     }).isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { searchActive: false };
+    this.toggleSearch = this.toggleSearch.bind(this);
+  }
+
   componentWillMount() {
     this.props.fetchHomeContents();
+  }
+
+  toggleSearch(active = false) {
+    this.setState({
+      searchActive: active
+    });
   }
 
   render() {
@@ -51,7 +64,7 @@ class FHome extends React.Component {
         <img alt="author logo" src="/assets/images/logo.png" className="f-author-logo" />
         <SiteLogo />
         <AuthorBio author={this.props.author} />
-        <SearchBar theme="dark" />
+        <SearchBar theme="dark" onClick={() => this.toggleSearch(true)} />
         <div className="f-icons-container">
           <FIcon theme="f-dark" icon={IconFont.TWITTER} />
           <FIcon theme="f-dark" icon={IconFont.GITHUB} />
@@ -60,6 +73,7 @@ class FHome extends React.Component {
         <RecentPosts recent={this.props.recent} minPlaceholder={5} />
         <footer>Tanay Kumar <span>Bera</span></footer>
       </div>
+      { this.state.searchActive && <FSearch close={() => this.toggleSearch()} /> }
     </div>);
   }
 }

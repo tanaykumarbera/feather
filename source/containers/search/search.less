@@ -1,0 +1,145 @@
+@import "../../utils/global.less";
+
+@searchBgColor: rgba(255, 255, 255, 0.98);
+@searchInputBoxColor: #DDD;
+@searchInput: #303030;
+
+.f-search-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  background: @searchBgColor;
+  padding-top: 1em;
+  .f-search-wrap {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    margin: 0px auto;
+    .DEVICE_SMALL({
+      width: 80%;
+    });
+    .DEVICE_MOBILE({
+      width: 90%;
+    });
+  }
+  #f-search-input {
+    display: block;
+    margin-top: 1em;
+    background: transparent;
+    font-size: 1.6em;
+    padding: 0.6em;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: 0px -1px 1px 0px @searchInputBoxColor inset;
+    color: @searchInput;
+    &::placeholder {
+      color: #AAA;
+    }
+  }
+  .f-inputLoader {
+    display: block;
+    transition: height 250ms;
+    width: 100%;
+    height: 0px;
+    &.loading {
+      height: 4px;
+      position: relative;
+      &::before {
+        position: absolute;
+        display: block;
+        content: ' ';
+        width: 0%;
+        top: 0;
+        bottom: 0;
+        background: @primaryColor;
+        animation: 1s linear infinite indeterminate;
+      }
+    }
+  }
+  .f-search-result-wrap {
+    height: 56%;
+    padding-top: 2em;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  button {
+    font-size: 1.6em;
+    border: 2px solid;
+    background: transparent;
+    border-radius: 50%;
+    padding-top: 0.em;
+    margin: 0 auto;
+    margin-top: 1em;
+    display: block;
+    transition: 250ms background;
+    outline: none;
+    .f-icon {
+      position: relative;
+      top: 0.2em;
+      color: @fontColor;
+    }
+    &:hover {
+      background: @fontColor;
+      .f-icon {
+        color: white;
+      }
+    }
+  }
+}
+
+.fs-item {
+  margin-top: 1px;
+  padding: 1em;
+  box-shadow: 0 1px 0px 0px @listDividerColor;
+  &:last-child {
+    box-shadow: none;
+  }
+  &-title {
+    font-size: 1.2em;
+    color: @titleColor;
+    display: table-cell;
+    vertical-align: top;
+  }
+  &-excerpt {
+    font-size: 0.8em;
+    color: @fontColorLight;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2em;
+    max-height: 2.4em;
+    margin: 0.2em 0;
+    p {
+      text-align: justify;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+    }
+  }
+  .fs-item-tags {
+    .f-icon {
+      font-size: 1.4em;
+      position: relative;
+      top: -0.1em;
+      color: @primaryColor;
+    }
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    left: 0;
+    width: 0%;
+  }
+  25% {
+    left: 25%;
+    width: 50%;
+  }
+	100% {
+    left: 100%;
+    width: 0%;
+  }
+}
