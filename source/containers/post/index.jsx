@@ -8,7 +8,7 @@ import FLoader from '../../components/fullpageloader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
 import { IconFont } from '../../utils';
-import { fetchPost } from '../../actions';
+import { fetchPost, fetchHomeContents } from '../../actions';
 
 import './post.less';
 
@@ -21,6 +21,7 @@ class FPost extends React.Component {
       })
     }).isRequired,
     fetchPost: React.PropTypes.func.isRequired,
+    fetchHomeContents: React.PropTypes.func.isRequired,
     author: React.PropTypes.shape({
       user: React.PropTypes.object,
       isLoading: React.PropTypes.bool,
@@ -57,6 +58,7 @@ class FPost extends React.Component {
   ]
 
   componentWillMount() {
+    if (!this.props.author.user) this.props.fetchHomeContents();
     this.props.fetchPost(this.props.match.params.slug);
   }
 
@@ -115,5 +117,5 @@ class FPost extends React.Component {
 }
 
 export default connect(state => state,
-  dispatch => bindActionCreators({ fetchPost }, dispatch)
+  dispatch => bindActionCreators({ fetchPost, fetchHomeContents }, dispatch)
 )(FPost);
