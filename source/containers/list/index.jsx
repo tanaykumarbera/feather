@@ -11,7 +11,7 @@ import SideBarPage from '../../components/sidebarpage';
 import AutoTriggerScroll from '../../components/autotriggerscroll';
 import PostListItem from '../../components/postlistitem';
 import { IconFont } from '../../utils';
-import { fetchPosts } from '../../actions';
+import { fetchPosts, fetchHomeContents } from '../../actions';
 
 import './list.less';
 // move default css from home to base <<<<<<<<
@@ -26,6 +26,7 @@ class FList extends React.Component {
   static propTypes = {
     type: React.PropTypes.string,
     fetchPosts: React.PropTypes.func.isRequired,
+    fetchHomeContents: React.PropTypes.func.isRequired,
     match: React.PropTypes.shape({
       params: React.PropTypes.shape({
         slug: React.PropTypes.string
@@ -61,6 +62,8 @@ class FList extends React.Component {
   }
 
   componentWillMount() {
+    // load user meta only if not loaded
+    if (!this.props.author.user) this.props.fetchHomeContents();
     this.fetchContents();
   }
 
@@ -148,5 +151,5 @@ class FList extends React.Component {
 }
 
 export default connect(state => state,
-  dispatch => bindActionCreators({ fetchPosts }, dispatch)
+  dispatch => bindActionCreators({ fetchPosts, fetchHomeContents }, dispatch)
 )(FList);
