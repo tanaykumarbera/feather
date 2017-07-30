@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import FLoader from '../../components/fullpageloader';
+import FLoader from '../../components/loader';
 import SiteLogo from '../../components/sitelogo';
 import AuthorBio from '../../components/authorbio';
 import SearchBar from '../../components/searchbar';
@@ -39,7 +39,9 @@ class FHome extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchHomeContents();
+    if (!this.props.author.user) {
+      this.props.fetchHomeContents();
+    }
   }
 
   toggleSearch(active = false) {

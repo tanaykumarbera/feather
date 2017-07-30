@@ -34,8 +34,9 @@ class FError extends React.Component {
         <img className="f-error-img" src="/assets/images/f-404.png" alt="" />
         <h1 className="f-error-head">Dang! Seriously, a 404?</h1>
         <h2 className="f-error-suggestion">
-          While it is not something that I have for you,
-          how about checking my recent publications
+          { 'While I don\'t have that stuff for you,' }
+          <br />
+          { 'how about going through some of my recent publications? ' }
         </h2>
         <div className="f-error-recent">
           {isLoading &&

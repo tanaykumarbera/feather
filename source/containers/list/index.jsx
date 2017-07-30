@@ -45,7 +45,10 @@ class FList extends React.Component {
       hasMore: React.PropTypes.bool,
       isLoading: React.PropTypes.bool,
       hasError: React.PropTypes.bool
-    })
+    }),
+    history: React.PropTypes.shape({
+      replace: React.PropTypes.func
+    }).isRequired
   };
 
   static defaultProps = {
@@ -68,7 +71,10 @@ class FList extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.match.params.slug !== newProps.match.params.slug) {
+    if (newProps.list.errorCode === 404) {
+      // post not found. Redirect to error page
+      this.props.history.replace('/error');
+    } else if (this.props.match.params.slug !== newProps.match.params.slug) {
       // check for url change. If changed reload contents for new url
       this.type = newProps.type;
       this.fetchContents(0, newProps.match.params.slug);
@@ -123,10 +129,7 @@ class FList extends React.Component {
               HOME
             </Link>
             { ' » ' }
-            { isTag && (<Link to="/tags" className="f-nav-tags">
-                tags
-            </Link>)}
-            { isTag && ' » ' }
+            { isTag && 'tags » ' }
             <span className="f-nav-active">
               { isTag ? `#${this.props.match.params.slug}` : 'Archieve' }
             </span>

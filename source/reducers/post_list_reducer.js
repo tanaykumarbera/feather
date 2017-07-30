@@ -26,7 +26,10 @@ export default function (currentState = INITIAL_STATE.list, action) {
           hasMore: newIdentifier ? INITIAL_STATE.list.hasMore : currentState.hasMore,
           posts: (currentState.identifier === action.identifier) ? currentState.posts : [],
           isLoading: (action.type === LOADING),
-          hasError: (action.type === API_ERROR)
+          hasError: (action.type === API_ERROR),
+          errorCode: action.payload.error
+            ? action.payload.error.response.status
+            : undefined
         };
       }
       break;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 
 import FIcon from '../../components/icon';
-import FLoader from '../../components/fullpageloader';
+import FLoader from '../../components/loader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
 import { IconFont } from '../../utils';
@@ -35,8 +35,12 @@ class FPost extends React.Component {
         tags: React.PropTypes.array
       }),
       isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
-    })
+      hasError: React.PropTypes.bool,
+      errorCode: React.PropTypes.number
+    }),
+    history: React.PropTypes.shape({
+      replace: React.PropTypes.func
+    }).isRequired
   };
 
   static defaultProps = {
@@ -60,6 +64,13 @@ class FPost extends React.Component {
   componentWillMount() {
     if (!this.props.author.user) this.props.fetchHomeContents();
     this.props.fetchPost(this.props.match.params.slug);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.active.errorCode === 404) {
+      // post not found. Redirect to error page
+      this.props.history.replace('/error');
+    }
   }
 
   componentDidUpdate() {
@@ -91,27 +102,26 @@ class FPost extends React.Component {
 
   render() {
     const { post, isLoading } = this.props.active;
-    if (isLoading || post === null) {
-      return (<FLoader />);
-    }
     return (<SideBarPage author={this.props.author}>
-      <div className="f-post-wrap">
-        <h1 className="f-post-title">{post.title}</h1>
-        { post.tags && (<div className="f-post-tags">
-          <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
-          {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
-        </div>)}
-        <div
-          className="f-post-contents"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(post.html, {
-              allowedTags: this.allowedTags
-            })
-          }}
-        />
-        <div id="disqus_thread" className="f-post-comment" />
-      </div>
+      {(isLoading || post === null) ? <FLoader /> : (
+        <div className="f-post-wrap">
+          <h1 className="f-post-title">{post.title}</h1>
+          { post.tags && (<div className="f-post-tags">
+            <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
+            {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
+          </div>)}
+          <div
+            className="f-post-contents"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(post.html, {
+                allowedTags: this.allowedTags
+              })
+            }}
+          />
+          <div id="disqus_thread" className="f-post-comment" />
+        </div>
+      )}
     </SideBarPage>);
   }
 }
