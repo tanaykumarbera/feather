@@ -15,7 +15,10 @@ export default function (currentState = INITIAL_STATE.active, action) {
         return {
           post: null,
           isLoading: (action.type === LOADING),
-          hasError: (action.type === API_ERROR)
+          hasError: (action.type === API_ERROR),
+          errorCode: action.payload.error
+            ? action.payload.error.response.status
+            : undefined
         };
       }
       break;

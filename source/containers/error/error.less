@@ -1,0 +1,32 @@
+@import "../../utils/global.less";
+
+.f-error-wrap {
+  text-align: center;
+  padding: 1em;
+  .DEVICE_SMALL({
+    background: white;
+    border-top: 0.6em solid @primaryColor;
+  });
+}
+
+.f-error-head, .f-error-suggestion {
+  font-weight: thin;
+}
+
+.f-error-img {
+    height: 320px;
+    width: auto;
+    margin-top: 5em;
+}
+
+.f-error-head {
+  font-size: 3em;
+  color: @fontColor;
+  margin: 1em;
+}
+
+.f-error-suggestion {
+  font-size: 1em;
+  color: @fontColor;
+  line-height: 1.6em;
+}
