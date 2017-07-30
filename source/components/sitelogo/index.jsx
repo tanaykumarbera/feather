@@ -1,19 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { IconFont } from '../../utils';
+import Config from '../../utils/config';
 
-const SiteLogo = (props) => {
-  const theme = `f-sitelogo ${props.theme}`;
-  return (<div className={theme}>
+const SiteLogo = () => (<div className="f-sitelogo">
+  <Link to={Config.URL_HOME}>
     <span className="f-icon" data-icon={IconFont.SITE_LOGO} />
-  </div>);
-};
-
-SiteLogo.propTypes = {
-  theme: PropTypes.string
-};
-
-SiteLogo.defaultProps = {
-  theme: ''
-};
+  </Link>
+</div>);
 
 export default SiteLogo;

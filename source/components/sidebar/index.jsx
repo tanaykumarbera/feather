@@ -6,6 +6,7 @@ import SearchBar from '../../components/searchbar';
 import FIcon from '../../components/icon';
 
 import { IconFont } from '../../utils';
+import Config from '../../utils/config';
 
 import './sidebar.less';
 
@@ -17,9 +18,9 @@ const SideBar = ({ author }) => (
         <AuthorBio author={author} theme="light" />
         <SearchBar theme="light" />
         <div className="f-icons-container">
-          <FIcon theme="f-light" icon={IconFont.TWITTER} />
-          <FIcon theme="f-light" icon={IconFont.GITHUB} />
-          <FIcon theme="f-light" icon={IconFont.INSTAGRAM} />
+          <FIcon theme="f-light" url={Config.URL_TWITTER} icon={IconFont.TWITTER} />
+          <FIcon theme="f-light" url={Config.URL_GITHUB} icon={IconFont.GITHUB} />
+          <FIcon theme="f-light" url={Config.URL_INSTAGRAM} icon={IconFont.INSTAGRAM} />
         </div>
       </div>
     )}

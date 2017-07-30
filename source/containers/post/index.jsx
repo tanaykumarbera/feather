@@ -115,6 +115,7 @@ class FPost extends React.Component {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(post.html, {
+                allowedAttributes: false,
                 allowedTags: this.allowedTags
               })
             }}

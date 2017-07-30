@@ -11,6 +11,7 @@ import FIcon from '../../components/icon';
 import FSearch from '../search';
 
 import { IconFont } from '../../utils';
+import Config from '../../utils/config';
 
 import { fetchHomeContents } from '../../actions';
 
@@ -68,9 +69,9 @@ class FHome extends React.Component {
         <AuthorBio author={this.props.author} />
         <SearchBar theme="dark" onClick={() => this.toggleSearch(true)} />
         <div className="f-icons-container">
-          <FIcon theme="f-dark" icon={IconFont.TWITTER} />
-          <FIcon theme="f-dark" icon={IconFont.GITHUB} />
-          <FIcon theme="f-dark" icon={IconFont.INSTAGRAM} />
+          <FIcon theme="f-dark" url={Config.URL_TWITTER} icon={IconFont.TWITTER} />
+          <FIcon theme="f-dark" url={Config.URL_GITHUB} icon={IconFont.GITHUB} />
+          <FIcon theme="f-dark" url={Config.URL_INSTAGRAM} icon={IconFont.INSTAGRAM} />
         </div>
         <RecentPosts recent={this.props.recent} minPlaceholder={5} />
         <footer>Tanay Kumar <span>Bera</span></footer>

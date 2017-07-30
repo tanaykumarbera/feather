@@ -30,6 +30,3 @@ export const generateInkRipple = (parent, event) => {
   ink.style.left = `${x}px`;
   ink.className += ' animate';
 };
-
-export const THEME = {
-};
