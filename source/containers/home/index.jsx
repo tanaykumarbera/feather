@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { Helmet } from 'react-helmet';
 import FLoader from '../../components/loader';
 import SiteLogo from '../../components/sitelogo';
 import AuthorBio from '../../components/authorbio';
@@ -59,6 +59,9 @@ class FHome extends React.Component {
       return (<FLoader />);
     }
     return (<div className="f-page f-home parallax">
+      <Helmet>
+        <title>{ `Home - ${Config.BLOG_TITLE}` }</title>
+      </Helmet>
       <div className="f-background parallax-layer parallax-layer-background">
         <div className="f-abstract abstract-1" />
         <div className="f-abstract abstract-2" />

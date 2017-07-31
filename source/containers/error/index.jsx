@@ -1,10 +1,12 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import PostListItem from '../../components/postlistitem';
 import SideBarPage from '../../components/sidebarpage';
 import { fetchHomeContents } from '../../actions';
 
+import Config from '../../utils/config';
 import './error.less';
 
 class FError extends React.Component {
@@ -30,6 +32,9 @@ class FError extends React.Component {
   render() {
     const { posts, isLoading, hasError } = this.props.recent;
     return (<SideBarPage author={this.props.author}>
+      <Helmet>
+        <title>{ `Not Found - Error 404 - ${Config.BLOG_TITLE}` }</title>
+      </Helmet>
       <div className="f-error-wrap">
         <img className="f-error-img" src="/assets/images/f-404.png" alt="" />
         <h1 className="f-error-head">Dang! Seriously, a 404?</h1>

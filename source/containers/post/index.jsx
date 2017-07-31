@@ -2,11 +2,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
+import { Helmet } from 'react-helmet';
 
 import FIcon from '../../components/icon';
 import FLoader from '../../components/loader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
+import Config from '../../utils/config';
 import { IconFont } from '../../utils';
 import { fetchPost, fetchHomeContents } from '../../actions';
 
@@ -103,6 +105,14 @@ class FPost extends React.Component {
   render() {
     const { post, isLoading } = this.props.active;
     return (<SideBarPage author={this.props.author}>
+      <Helmet>
+        <title>
+          {(isLoading || post === null)
+            ? Config.BLOG_TITLE
+            : `${post.title} - ${Config.BLOG_TITLE}`
+          }
+        </title>
+      </Helmet>
       {(isLoading || post === null) ? <FLoader /> : (
         <div className="f-post-wrap">
           <h1 className="f-post-title">{post.title}</h1>

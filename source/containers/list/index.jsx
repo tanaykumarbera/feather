@@ -3,13 +3,14 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import INITIAL_STATE from '../../feather_initial';
-
 import FIcon from '../../components/icon';
 import SideBarPage from '../../components/sidebarpage';
 import AutoTriggerScroll from '../../components/autotriggerscroll';
 import PostListItem from '../../components/postlistitem';
+import Config from '../../utils/config';
 import { IconFont } from '../../utils';
 import { fetchPosts, fetchHomeContents } from '../../actions';
 
@@ -113,7 +114,11 @@ class FList extends React.Component {
   render() {
     const { posts, isLoading, hasMore } = this.props.list;
     const isTag = this.type === FList.Type.TAGS;
+    const navItem = isTag ? `#${this.props.match.params.slug}` : 'Archieve';
     return (<SideBarPage author={this.props.author}>
+      <Helmet>
+        <title>{ `${navItem} - ${Config.BLOG_TITLE}` }</title>
+      </Helmet>
       <AutoTriggerScroll
         trigger={this.triggerNext}
         hasMore={hasMore}
@@ -130,9 +135,7 @@ class FList extends React.Component {
             </Link>
             { ' » ' }
             { isTag && 'tags » ' }
-            <span className="f-nav-active">
-              { isTag ? `#${this.props.match.params.slug}` : 'Archieve' }
-            </span>
+            <span className="f-nav-active">{ navItem }</span>
           </nav>
         </div>
         <ReactCSSTransitionGroup
