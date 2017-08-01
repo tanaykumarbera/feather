@@ -2,11 +2,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
+import { Helmet } from 'react-helmet';
 
 import FIcon from '../../components/icon';
 import FLoader from '../../components/loader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
+import Config from '../../utils/config';
 import { IconFont } from '../../utils';
 import { fetchPost, fetchHomeContents } from '../../actions';
 
@@ -102,27 +104,57 @@ class FPost extends React.Component {
 
   render() {
     const { post, isLoading } = this.props.active;
+    const hasPost = !(isLoading || post === null);
     return (<SideBarPage author={this.props.author}>
-      {(isLoading || post === null) ? <FLoader /> : (
-        <div className="f-post-wrap">
-          <h1 className="f-post-title">{post.title}</h1>
-          { post.tags && (<div className="f-post-tags">
-            <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
-            {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
-          </div>)}
-          <div
-            className="f-post-contents"
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: sanitizeHtml(post.html, {
-                allowedAttributes: false,
-                allowedTags: this.allowedTags
-              })
-            }}
-          />
-          <div id="disqus_thread" className="f-post-comment" />
-        </div>
-      )}
+      <Helmet>
+        <title>{hasPost ? `${post.title} - ${Config.BLOG_TITLE}` : Config.BLOG_TITLE}</title>
+        {hasPost && post.meta_title && <meta name="title" content={post.meta_title} />}
+        {hasPost && post.meta_description && <meta name="description" content={post.meta_description} />}
+      </Helmet>
+      {!hasPost ? <FLoader /> : (<div
+        className="f-post-wrap"
+        itemScope
+        itemType="http://schema.org/BlogPosting"
+      >
+        <h1 className="f-post-title" itemProp="headline">{post.title}</h1>
+        <link itemProp="image" href={post.image} />
+        { post.tags && (<div className="f-post-tags">
+          <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
+          <meta name="keywords" content={post.tags.map(tag => tag.name).join(',')} />
+          {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
+        </div>)}
+        <div
+          itemProp="articleBody"
+          className="f-post-contents"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHtml(post.html, {
+              allowedAttributes: false,
+              allowedTags: this.allowedTags
+            })
+          }}
+        />
+        <time itemProp="datePublished" dateTime={post.published_at} />
+        <time itemProp="dateModified" dateTime={post.updated_at} />
+        <span
+          itemProp="publisher"
+          itemScope
+          itemType="http://schema.org/Organization"
+        >
+          <meta itemProp="name" name="name" content={Config.BLOG_PUBLISHER} />
+          <link itemProp="logo" href="/assets/images/favicon.png" />
+        </span>
+        <span
+          itemProp="author"
+          itemScope
+          itemType="http://schema.org/Person"
+        >
+          <meta itemProp="name" name="name" content={Config.BLOG_AUTHOR_NAME} />
+          <meta itemProp="email" name="email" content={Config.BLOG_AUTHOR_EMAIL} />
+        </span>
+        <link itemProp="mainEntityOfPage" href={Config.URL_HOME} />
+        <div id="disqus_thread" className="f-post-comment" />
+      </div>)}
     </SideBarPage>);
   }
 }

@@ -7,6 +7,7 @@
   bottom: 0;
   height: 100%;
   display: table;
+  background-color: @primaryColor;
   background: url(/assets/images/sidebar-bg.png) center;
   background-size: cover;
 }
@@ -22,6 +23,10 @@
   padding: 1em;
   box-sizing: border-box;
   text-align: center;
+  & > * {
+    opacity: 1;
+    transition: opacity 250ms;
+  }
 
   .f-sitelogo {
     font-size: 8em;
@@ -54,5 +59,8 @@
       margin: 8px;
     }
   }
+}
 
+.fs-not-ready > * {
+  opacity: 0;
 }

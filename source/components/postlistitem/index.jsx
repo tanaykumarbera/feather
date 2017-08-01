@@ -4,6 +4,7 @@ import sanitizeHtml from 'sanitize-html';
 import FTag from '../tag';
 import FIcon from '../icon';
 import { IconFont } from '../../utils';
+import Config from '../../utils/config';
 
 import './postlistitem.less';
 
@@ -17,18 +18,41 @@ export default class PostListItem extends React.Component {
       image: React.PropTypes.string,
       meta: React.PropTypes.string,
       tags: React.PropTypes.array
-    })
+    }),
+    index: React.PropTypes.number
   };
 
   static defaultProps = {
-    post: undefined
+    post: undefined,
+    index: -1
   };
 
-  static renderPost(post) {
+  static renderPost(post, index) {
     return (
-      <div className="f-post-list-item">
-        <img src={post.image || src} className="post-feature" alt="" />
-        <Link to={`/${post.slug}`} ><h2 className="post-title">{ post.title }</h2></Link>
+      <div
+        className="f-post-list-item"
+        itemProp="itemListElement"
+        itemScope
+        itemType="http://schema.org/BlogPosting"
+      >
+        {(index !== -1) && <meta itemProp="position" name="position" content={index} />}
+        <img
+          alt={`feature for ${post.title}`}
+          src={post.image || src}
+          className="post-feature"
+          itemProp="image"
+        />
+        <Link
+          to={`/${post.slug}`}
+          itemProp="url"
+        >
+          <h2
+            className="post-title"
+            itemProp="headline"
+          >
+            { post.title }
+          </h2>
+        </Link>
         <div
           className="post-excerpt"
           // eslint-disable-next-line react/no-danger
@@ -50,6 +74,25 @@ export default class PostListItem extends React.Component {
             }
           </div>
         )}
+        <time itemProp="datePublished" dateTime={post.published_at} />
+        <time itemProp="dateModified" dateTime={post.updated_at} />
+        <span
+          itemProp="publisher"
+          itemScope
+          itemType="http://schema.org/Organization"
+        >
+          <meta itemProp="name" name="name" content={Config.BLOG_PUBLISHER} />
+          <link itemProp="logo" href="/assets/images/favicon.png" />
+        </span>
+        <span
+          itemProp="author"
+          itemScope
+          itemType="http://schema.org/Person"
+        >
+          <meta itemProp="name" name="name" content={Config.BLOG_AUTHOR_NAME} />
+          <meta itemProp="email" name="email" content={Config.BLOG_AUTHOR_EMAIL} />
+        </span>
+        <link itemProp="mainEntityOfPage" href={Config.URL_HOME} />
       </div>
     );
   }
@@ -69,7 +112,7 @@ export default class PostListItem extends React.Component {
   }
 
   render() {
-    const { post } = this.props;
-    return post ? PostListItem.renderPost(post) : PostListItem.renderLoader();
+    const { post, index } = this.props;
+    return post ? PostListItem.renderPost(post, index) : PostListItem.renderLoader();
   }
 }
