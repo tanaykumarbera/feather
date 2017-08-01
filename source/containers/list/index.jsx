@@ -123,6 +123,8 @@ class FList extends React.Component {
         trigger={this.triggerNext}
         hasMore={hasMore}
         isLoading={isLoading}
+        itemScope
+        itemType="http://schema.org/ItemList"
       >
         <div className="f-list-head">
           <nav>
@@ -148,7 +150,7 @@ class FList extends React.Component {
           transitionEnterTimeout={500}
           transitionLeave={false}
         >
-          { posts.map(post => <PostListItem key={post.id} post={post} />) }
+          { posts.map((post, index) => <PostListItem key={post.id} post={post} index={index} />) }
           { ((!posts.length && isLoading) || hasMore) && <PostListItem key="loading" /> }
         </ReactCSSTransitionGroup>
       </AutoTriggerScroll>
