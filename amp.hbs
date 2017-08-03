@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html amp lang="en">
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8">
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    {{!-- Brand icon --}}
+    <link rel="shortcut icon" href="{{asset "favicon.ico"}}">
+
+    {{amp_ghost_head}}
+
+    {{!-- Styles'n'Scripts --}}
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quattrocento" />
+    <style amp-custom>
+      * { font-family: 'Quattrocento', serif; color: #303030; }
+      @font-face {
+        font-family: "feather-icons";
+        src:url("/assets/fonts/feather-icons.eot");
+        src:url("/assets/fonts/feather-icons.eot?#iefix") format("embedded-opentype"),
+          url("/assets/fonts/feather-icons.woff") format("woff"),
+          url("/assets/fonts/feather-icons.ttf") format("truetype"),
+          url("/assets/fonts/feather-icons.svg#feather-icons") format("svg");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        background: white;
+        border-top: 1em solid #6F40F2;
+      }
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .post-title {
+        font-size: 3.2em
+      }
+      .post-meta {
+        color: #6F40F2;
+        font-size: 1.6em;
+      }
+      .post-meta a {
+        color: inherit;
+      }
+      .post-content {
+        font-size: 1.6em;
+        text-align: justify;
+      }
+      blockquote {
+        background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI1NnB4IiBoZWlnaHQ9IjI1NnB4IiB2aWV3Qm94PSIwIDAgMTIzLjk2MSAxMjMuOTYxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMjMuOTYxIDEyMy45NjE7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNNDkuOCwyOS4wMzJjMy4xLTEuMyw0LjQtNSwzLThsLTQuOS0xMC4zYy0xLjQtMi44OTktNC44LTQuMi03LjgtMi44OTljLTguNSwzLjYtMTUuOCw4LjMtMjEuNiwxNCAgIEMxMS40LDI4LjUzMiw2LjYsMzYuMjMyLDQsNDQuNzMyYy0yLjYsOC42MDEtNCwyMC4zLTQsMzUuMnYzMC43YzAsMy4zLDIuNyw2LDYsNmgzOS4zYzMuMywwLDYtMi43LDYtNnYtMzkuM2MwLTMuMzAxLTIuNy02LTYtNiAgIEgyNi41YzAuMi0xMC4xMDEsMi42LTE4LjIsNy0yNC4zMDFDMzcuMSwzNi4xMzMsNDIuNSwzMi4xMzMsNDkuOCwyOS4wMzJ6IiBmaWxsPSIjZGZkZmRmIi8+Cgk8cGF0aCBkPSJNMTIwLjQsMjkuMDMyYzMuMS0xLjMsNC4zOTktNSwzLThsLTQuOS0xMC4xOTljLTEuNC0yLjktNC44LTQuMi03LjgtMi45Yy04LjQsMy42LTE1LjYwMSw4LjMtMjEuNSwxMy45ICAgYy03LjEwMSw2LjgtMTIsMTQuNS0xNC42MDEsMjNjLTIuNiw4LjM5OS0zLjg5OSwyMC4xLTMuODk5LDM1LjF2MzAuN2MwLDMuMywyLjcsNiw2LDZIMTE2YzMuMywwLDYtMi43LDYtNnYtMzkuMyAgIGMwLTMuMzAxLTIuNy02LTYtNkg5Ny4xYzAuMi0xMC4xMDEsMi42MDEtMTguMiw3LTI0LjMwMUMxMDcuNywzNi4xMzMsMTEzLjEsMzIuMTMzLDEyMC40LDI5LjAzMnoiIGZpbGw9IiNkZmRmZGYiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+        background-position: left top;
+        margin: 1em 0;
+        padding-left: 2em;
+        padding-left: 2.4em;
+        background-repeat: no-repeat;
+        background-size: 2em;
+      }
+      .site-footer {
+        margin-top: 4em;
+        min-height: 100vh;
+        height: auto;
+        width: 100%;
+        display: table;
+        background-color: #6F40F2;
+      }
+      .author-meta {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+      .author-meta * {
+        color: white;
+      }
+      .site-logo {
+        font-size: 12em;
+        height: 1em;
+        margin-top: 0.4em;
+      }
+      .author-bio {
+        max-width: 300px;
+        margin: 1em auto 3em;
+        color: white;
+        font-size: 1.6em;
+      }
+      .author-links a {
+        font-size: 1.8em;
+        margin: 0.8em;
+      }
+      .switch-amp {
+        font-weight: bold;
+        margin: 4em auto;
+      }
+      .switch-amp a {
+        text-decoration: underline;
+      }
+      @media (max-width: 800px) {
+        .content { padding: 0 1em }
+        .post-meta, .post-content, .author-bio {
+          font-size: 1.4em;
+        }
+      }
+      .f-icon::before {
+        display: inline-block;
+        font-family: "feather-icons";
+        content: attr(data-icon);
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+
+    {{!-- The AMP boilerplate --}}
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+		{{!-- amp_components helper renders the necessary script tags for AMP depending on the HTML in the content --}}
+    {{amp_components}}
+
+</head>
+<body class="amp-template">
+    {{#post}}
+    <main class="content" role="main">
+        <article class="post">
+          <header class="post-header">
+            <h1 class="post-title">{{title}}</h1>
+            <section class="post-meta">
+              {{tags prefix='In '}}
+            </section>
+          </header>
+          <section class="post-content">
+              {{amp_content}}
+          </section>
+        </article>
+    </main>
+    <footer class="site-footer clearfix">
+      <section class="author-meta">
+        <section class="site-logo">
+          <a href="/">
+            <span class="f-icon" data-icon="a" />
+          </a>
+        </section>
+        <section class="author-bio">
+          {{#author}}
+          <p>{{bio}}</p>
+          {{/author}}
+        </section>
+        <section class="author-links">
+          <a href="https://twitter.com/tanaykumarbera">
+            <span class="f-icon" data-icon="d" />
+          </a>
+          <a href="https://github.com/tanaykumarbera">
+            <span class="f-icon" data-icon="e" />
+          </a>
+          <a href="https://www.instagram.com/tanaykumarbera">
+            <span class="f-icon" data-icon="f" />
+          </a>
+        </section>
+        <section class="switch-amp">
+          Optimized for speed. <a href="{{url absolute="true"}}">View Original</a>
+        </section>
+      </section>
+    </footer>
+    {{/post}}
+</body>
+</html>
