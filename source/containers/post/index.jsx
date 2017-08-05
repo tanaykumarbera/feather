@@ -91,14 +91,19 @@ class FPost extends React.Component {
       this.page.url = pageUrl;
       this.page.identifier = pageIdentifier;
     };
-    const disqusScript = document.createElement('script');
-    disqusScript.src = 'https://thehandpickers.disqus.com/embed.js';
-    disqusScript.setAttribute('data-timestamp', +new Date());
-    disqusScript.async = true;
-
-    const disqusDiv = document.getElementById('disqus_thread');
-    if (disqusDiv) {
-      disqusDiv.appendChild(disqusScript);
+    if (window.disqus_added) {
+      // eslint-disable-next-line
+      DISQUS.reset({
+        reload: true,
+        config: window.disqus_config
+      });
+    } else {
+      const dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = Config.BLOG_DISQUS;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      window.disqus_added = true;
     }
   }
 

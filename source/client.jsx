@@ -7,6 +7,9 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import FRouter from './routes';
 
+import './utils/normalize.less';
+import './utils/global.less';
+
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
 ReactDOM.render(

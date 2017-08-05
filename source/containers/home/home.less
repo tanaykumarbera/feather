@@ -1,5 +1,4 @@
-@import "../../utils/normalize.less";
-@import "../../utils/global.less";
+@import (reference) "../../utils/global.less";
 
 * {
   font-family: 'Quattrocento', serif;
@@ -15,53 +14,8 @@ html, body, .f-page {
   height: 100%;
 }
 
-.f-background {
-  position: relative;
-  width: 100%;
-  height: 180vh;
-  overflow: hidden;
-  @media(max-width: 1200px) {
-    height: 160vh;
-  }
-  @media(max-width: 910px) {
-    height: 120vh;
-  }
-  @media(max-width: 640px) {
-    height: 80vh;
-  }
-}
-
-.f-abstract {
-  background: @bgShapeColor;
-  position: absolute;
-}
-
-.abstract-1 {
-  width: 100%;
-  height: 600px;
-  right: -50%;
-  top: -610px;
-  transform-origin: left bottom;
-  transform: rotate(42deg);
-}
-
-.abstract-2 {
-  width: 175%;
-  height: 100vh;
-  right: 0;
-  top: 43vw;
-  transform-origin: right top;
-  transform: rotate(-20deg);
-  @media(max-width: 780px) {
-      top: 42vh;
-  }
-  @media(max-width: 420px) {
-      top: 40vh;
-  }
-}
-
-@perspective: 100;
-@translateZ: -50;
+@perspective: 1;
+@translateZ: -1;
 @scaleFactor: 1 + (@translateZ * -1) / @perspective;
 .parallax {
   perspective: unit(@perspective, px);
@@ -85,14 +39,29 @@ html, body, .f-page {
   }
 }
 
+.f-abstract-1 {
+  height: 50vw;
+  background: white;
+  &::after {
+    content: ' ';
+    display: block;
+    float: right;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 112vw 50vw 0;
+    border-color: transparent #F0F0F0 transparent transparent;
+  }
+  .DEVICE_MOBILE({
+    display: none;
+  });
+}
+
 .f-contents {
   padding-top: 8vh;
   max-width: 1000px;
   margin: 0px auto;
   text-align: center;
-  .f-author-logo {
-      box-shadow: 0px 0px 0px 2px #FEFEFE;
-  }
   .f-sitelogo {
     width: 100%;
     font-size: 8em;
@@ -106,6 +75,9 @@ html, body, .f-page {
     margin: 0px auto;
     font-size: 1.4em;
     color: @fontColor;
+    .DEVICE_MOBILE({
+      margin: 0em 1em;
+    });
   }
   .f-icons-container {
     font-size: 2.4em;
@@ -129,6 +101,5 @@ html, body, .f-page {
       font-weight: bold;
       color: @fontColorHighLighted;
     }
-
   }
 }
