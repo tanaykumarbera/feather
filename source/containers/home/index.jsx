@@ -63,8 +63,7 @@ class FHome extends React.Component {
         <title>{ `Home - ${Config.BLOG_TITLE}` }</title>
       </Helmet>
       <div className="f-background parallax-layer parallax-layer-background">
-        <div className="f-abstract abstract-1" />
-        <div className="f-abstract abstract-2" />
+        <div className="f-abstract-1" />
       </div>
       <div className="f-contents parallax-layer parallax-layer-foreground">
         <img alt="author logo" src="/assets/images/logo.png" className="f-author-logo" />
