@@ -1,8 +1,9 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var LessPluginGroupMediaQueries = require('less-plugin-group-css-media-queries');
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
+const config = {
   entry: './source/client.jsx',
   output: {
     path: path.resolve(__dirname, './assets'),
@@ -49,7 +50,18 @@ module.exports = {
       filename: 'styles/feather.css',
       allChunks: true
     })
-  ],
-  devtool: 'source-map',
-  watch: true
+  ]
+};
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(new UglifyJSPlugin({
+      mangle: {
+          except: ['exports']
+      }
+    }));
+} else {
+    config.devtool = "#cheap-module-source-map";
+    config.watch = true;
 }
+
+module.exports = config;
