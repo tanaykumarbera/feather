@@ -10,6 +10,10 @@
   background-color: @primaryColor;
   background: url(/assets/images/sidebar-bg.png) center;
   background-size: cover;
+  & * ::selection {
+    color: @primaryColor;
+    background: fade(white, 95%);
+  }
 }
 
 .fs-contents {
