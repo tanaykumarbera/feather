@@ -31,6 +31,30 @@ html, body, .feather-wrap, .feather-contents, .f-page {
   background: fade(@primaryColor, 95%);
 }
 
+.smart_underline(@bgColor: white, @text: @fontColor, @selection: fade(@primaryColor, 95%), @position: 86%) {
+  color: @text;
+  text-decoration: none;
+  background: linear-gradient(@bgColor, @bgColor), linear-gradient(@bgColor, @bgColor), linear-gradient(@text, @text);
+  background-size: .05em 1px, .05em 1px, 1px 1px;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  text-shadow: 0.03em 0 @bgColor, -0.03em 0 @bgColor, 0 0.03em @bgColor, 0 -0.03em @bgColor, 0.06em 0 @bgColor, -0.06em 0 @bgColor, 0.09em 0 @bgColor, -0.09em 0 @bgColor, 0.12em 0 @bgColor, -0.12em 0 @bgColor, 0.15em 0 @bgColor, -0.15em 0 @bgColor;
+  background-position-y: @position, @position, @position;
+  background-position-x: 0%, 100%, 0%;
+
+  &::selection {
+    text-shadow: 0.03em 0 @selection, -0.03em 0 @selection, 0 0.03em @selection, 0 -0.03em @selection, 0.06em 0 @selection, -0.06em 0 @selection, 0.09em 0 @selection, -0.09em 0 @selection, 0.12em 0 @selection, -0.12em 0 @selection, 0.15em 0 @selection, -0.15em 0 @selection;
+    background: @selection;
+  }
+
+  &:before, &:after, *, *:before, *:after {
+    text-shadow: none;
+  }
+
+  &:visited{
+    color: @text;
+  }
+}
+
 /* Material ink ripple effect
  * http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design
  */
