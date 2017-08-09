@@ -40,6 +40,14 @@
         height: 100%;
       }
     }
+    * a {
+      .smart_underline(white, @primaryColor);
+      &:hover {
+        background: @primaryColor;
+        text-shadow: none;
+        color: white;
+      }
+    }
   }
   img {
     width: 100%;
