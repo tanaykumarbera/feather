@@ -45,6 +45,7 @@ export default class PostListItem extends React.Component {
         <Link
           to={`/${post.slug}`}
           itemProp="url"
+          className="post-title-link"
         >
           <h2
             className="post-title"
@@ -58,7 +59,7 @@ export default class PostListItem extends React.Component {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(post.html, {
-              allowedTags: ['p', 'b', 'i', 'strong', 'a']
+              allowedTags: ['p', 'b', 'i', 'strong']
             })
           }}
         />
