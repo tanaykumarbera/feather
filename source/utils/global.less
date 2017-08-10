@@ -107,3 +107,9 @@ html, body, .feather-wrap, .feather-contents, .f-page {
 .DEVICE_MOBILE(@rules) {
   @media (max-width: 480px) { @rules(); }
 }
+
+.DEVICE_RETINA(@rules) {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @rules();
+  }
+}
