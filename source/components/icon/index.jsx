@@ -9,7 +9,12 @@ const FIcon = (props) => {
     (props.link
       ? (<Link to={props.url} className="f-icon-wrap">
         <span className={theme} data-icon={props.icon} />
-      </Link>) : (<a href={props.url} className="f-icon-wrap">
+      </Link>) : (<a
+        href={props.url}
+        className="f-icon-wrap"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span className={theme} data-icon={props.icon} />
       </a>)
     ) : (<span className={theme} data-icon={props.icon} />);

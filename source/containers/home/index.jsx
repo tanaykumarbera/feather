@@ -66,7 +66,12 @@ class FHome extends React.Component {
         <div className="f-abstract-1" />
       </div>
       <div className="f-contents parallax-layer parallax-layer-foreground">
-        <img alt="author logo" src="/assets/images/logo.png" className="f-author-logo" />
+        <img
+          alt="author logo"
+          className="f-author-logo"
+          src="/assets/images/logo.png"
+          srcSet="/assets/images/logo@2x.png 2x"
+        />
         <SiteLogo />
         <AuthorBio author={this.props.author} />
         <SearchBar theme="dark" onClick={() => this.toggleSearch(true)} />
@@ -76,7 +81,14 @@ class FHome extends React.Component {
           <FIcon theme="f-dark" url={Config.URL_INSTAGRAM} icon={IconFont.INSTAGRAM} />
         </div>
         <RecentPosts recent={this.props.recent} minPlaceholder={5} />
-        <footer>Tanay Kumar <span>Bera</span></footer>
+        <footer>
+          <img
+            alt="free icons by freepik.com"
+            className="f-icons-attribution"
+            src="/assets/images/freepik.png"
+            srcSet="/assets/images/freepik@2x.png 2x"
+          />
+        </footer>
       </div>
       { this.state.searchActive && <FSearch close={() => this.toggleSearch()} /> }
     </div>);
