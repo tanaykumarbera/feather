@@ -16,6 +16,7 @@ export default class PostListItem extends React.Component {
     post: React.PropTypes.shape({
       title: React.PropTypes.string,
       image: React.PropTypes.string,
+      feature_image: React.PropTypes.string,
       meta: React.PropTypes.string,
       tags: React.PropTypes.array
     }),
@@ -38,7 +39,7 @@ export default class PostListItem extends React.Component {
         {(index !== -1) && <meta itemProp="position" name="position" content={index} />}
         <img
           alt={`feature for ${post.title}`}
-          src={post.image || src}
+          src={post.feature_image || post.image || src}
           className="post-feature"
           itemProp="image"
         />
