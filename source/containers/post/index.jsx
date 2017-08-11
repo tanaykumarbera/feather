@@ -9,7 +9,7 @@ import FLoader from '../../components/loader';
 import FTag from '../../components/tag';
 import SideBarPage from '../../components/sidebarpage';
 import Config from '../../utils/config';
-import { IconFont } from '../../utils';
+import { IconFont, scrollToTop } from '../../utils';
 import { fetchPost, fetchHomeContents } from '../../actions';
 
 import './post.less';
@@ -64,6 +64,7 @@ class FPost extends React.Component {
   ]
 
   componentWillMount() {
+    scrollToTop();
     if (!this.props.author.user) this.props.fetchHomeContents();
     this.props.fetchPost(this.props.match.params.slug);
   }
