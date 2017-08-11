@@ -11,7 +11,7 @@ import SideBarPage from '../../components/sidebarpage';
 import AutoTriggerScroll from '../../components/autotriggerscroll';
 import PostListItem from '../../components/postlistitem';
 import Config from '../../utils/config';
-import { IconFont } from '../../utils';
+import { IconFont, scrollToTop } from '../../utils';
 import { fetchPosts, fetchHomeContents } from '../../actions';
 
 import './list.less';
@@ -79,6 +79,7 @@ class FList extends React.Component {
       // check for url change. If changed reload contents for new url
       this.type = newProps.type;
       this.fetchContents(0, newProps.match.params.slug);
+      scrollToTop();
     }
   }
 
