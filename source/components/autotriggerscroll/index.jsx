@@ -17,29 +17,56 @@ class AutoTriggerScroll extends React.Component {
 
   constructor(props) {
     super(props);
+    this.isPortrait = false;
     this.trigger = throttle(props.trigger, 5000);
-    this.onScroll = this.onScroll.bind(this);
+    this.onScroll = throttle(this.onScroll, 1000).bind(this);
+    this.updateDimensions = throttle(this.updateDimensions, 1000).bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions);
+    this.updateDimensions();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
+  /** Mobile / Portrait devices, which has height auto and body is scrolling
+  * Required condition
+  * Portrait: Height left i.e. scroll_total_height - (scroll_top + 2 * window_height)  <= Trigger
+  * In Portrait, footer is of 100vh, so twice the window height
+  * Landscape: Height left i.e. scroll_total_height - (scroll_top + window_height) <= Trigger
+  */
   onScroll() {
     const { hasMore, isLoading } = this.props;
     if (!hasMore || isLoading) return;
-    /** Required condition
-    * (window.scrollY + window.innerHeight + TRIGGER_HEIGHT >= document.body.scrollHeight)
-    */
-    const autoScroller = document.getElementById('f-auto-scroll');
-    if (autoScroller && autoScroller.scrollHeight - (
-      autoScroller.scrollTop + window.innerHeight) <= AutoTriggerScroll.TRIGGER_HEIGHT) {
-      // The scoll bottom is yet to reach. No actions needed.
+    if (this.scrollTarget.scrollHeight - (this.scrollTarget.scrollTop
+      + ((this.isPortrait ? 2 : 1) * window.innerHeight))
+      <= AutoTriggerScroll.TRIGGER_HEIGHT) {
       this.trigger();
     }
   }
 
+  updateDimensions() {
+    const oldScrollTarget = this.scrollTarget;
+    this.isPortrait = window.innerWidth < 986;
+    this.scrollTarget = this.isPortrait ? document.getElementsByClassName('f-page')[0]
+      : document.getElementById('f-auto-scroll');
+    if (oldScrollTarget !== undefined) {
+      if (oldScrollTarget !== this.scrollTarget) {
+        // reassignment - as scroll target may change.
+        oldScrollTarget.removeEventListener('scroll', this.onScroll);
+        this.scrollTarget.addEventListener('scroll', this.onScroll);
+      } // else same. no need to remove or modify
+    } else {
+      // first time assignment
+      this.scrollTarget.addEventListener('scroll', this.onScroll);
+    }
+  }
+
   render() {
-    return (<div
-      id="f-auto-scroll"
-      onScroll={throttle(this.onScroll, 1000)}
-    >
+    return (<div id="f-auto-scroll">
       { this.props.children }
     </div>);
   }

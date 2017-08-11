@@ -34,4 +34,6 @@ export const generateInkRipple = (parent, event) => {
 export const scrollToTop = () => {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
+  const fpage = document.getElementsByClassName('f-page')[0];
+  if (fpage) fpage.scrollTop = 0;
 };
