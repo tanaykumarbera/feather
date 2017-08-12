@@ -6,11 +6,31 @@
 @fontColorLighter: #AAA;
 @fontColorHighLighted: #F24044;
 @listDividerColor: #DDD;
+@codeBg: #F6F6F6;
+@inlineCodeColor: #DD4343;
 
 @import url('https://fonts.googleapis.com/css?family=Quattrocento');
 
 * {
   font-family: 'Quattrocento', serif;
+}
+
+code *, pre * {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+code, pre, :not(pre) > code[class*=language-], pre[class*=language-] {
+  background-color: @codeBg;
+}
+
+:not(pre) > code {
+  color: @inlineCodeColor;
+  padding: 0 0.24em;
+}
+
+pre[class*=language-] {
+  padding: 0 1em;
+  margin: 0;
 }
 
 html, body, .feather-wrap, .feather-contents, .f-page {

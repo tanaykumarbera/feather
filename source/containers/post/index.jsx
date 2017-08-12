@@ -92,6 +92,11 @@ class FPost extends React.Component {
         document.getElementById('disqus_thread').scrollIntoView();
       }
     }
+    /* global Prism */
+    if (postLoaded && Prism) {
+      Prism.plugins.autoloader.languages_path = Config.PRISM_GRAMMER;
+      Prism.highlightAll();
+    }
   }
 
   addDisqus(pageUrl, pageIdentifier) {
