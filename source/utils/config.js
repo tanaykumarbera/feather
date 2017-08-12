@@ -1,6 +1,7 @@
 const Config = {
   BLOG_TITLE: 'blog.tanay.co',
   BLOG_DISQUS: 'https://tanay.disqus.com/embed.js',
+  PRISM_GRAMMER: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/',
   BLOG_PUBLISHER: 'tanay.co',
   BLOG_AUTHOR_NAME: 'Tanay Kumar Bera',
   BLOG_AUTHOR_EMAIL: 'tanaykumarbera@gmail.com',
