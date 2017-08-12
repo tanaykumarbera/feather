@@ -42,6 +42,9 @@ class FPost extends React.Component {
     }),
     history: React.PropTypes.shape({
       replace: React.PropTypes.func
+    }).isRequired,
+    location: React.PropTypes.shape({
+      hash: React.PropTypes.string
     }).isRequired
   };
 
@@ -77,12 +80,16 @@ class FPost extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.hasDisqus) {
-      const { post, isLoading } = this.props.active;
-      const postLoaded = !(isLoading || post === null);
-      if (postLoaded) {
-        this.addDisqus(`/${post.slug}`, post.uuid);
-        this.hasDisqus = true;
+    const { post, isLoading } = this.props.active;
+    const postLoaded = !(isLoading || post === null);
+    if (postLoaded && !this.hasDisqus) {
+      this.addDisqus(`/${post.slug}`, post.uuid);
+      this.hasDisqus = true;
+    }
+    if (postLoaded && this.props.location.hash) {
+      const { hash } = this.props.location;
+      if (hash === '#discussion') {
+        document.getElementById('disqus_thread').scrollIntoView();
       }
     }
   }
