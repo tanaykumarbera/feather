@@ -1,0 +1,16 @@
+/**
+* Add the contents of this template to ghost footer inject area
+* Replace your tracking id and add / remove autotrack components as required
+* More info on autotrack https://github.com/googleanalytics/autotrack
+*/
+<script type="text/javascript" src="https://www.google-analytics.com/analytics.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script type="text/javascript">
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('require', 'cleanUrlTracker');
+  ga('require', 'eventTracker');
+  ga('require', 'outboundLinkTracker');
+  ga('require', 'urlChangeTracker');
+  ga('send', 'pageview');
+</script>
