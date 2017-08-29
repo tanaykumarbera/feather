@@ -65,6 +65,27 @@
       padding-left: 1.6em;
     });
   }
+  .f-group {
+    font-size: 0;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    -ms-flex-direction: column;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    display: -webkit-box;
+    display: flex;
+    div {
+      -webkit-box-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
+      width: 240px;
+      margin: .5vw;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
   .DEVICE_PORTRAIT({
     border-top: 0.4em solid @primaryColor;
   });
