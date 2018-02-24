@@ -14,7 +14,6 @@ export function fetchHomeContents() {
   }));
   const initialPosts = axios.get(ghost.url.api('posts', {
     include: 'tags',
-    fields: 'id,title,slug,image,feature_image,tags,html',
     limit: 5
   }));
   return (dispatch) => {
