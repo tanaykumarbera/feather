@@ -17,7 +17,9 @@
     "react",
     "ghost-theme"
   ],
-  "author": "tanaykumarbera@gmail.com",
+  "author": {
+    "email": "tanaykumarbera@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tanaykumarbera/feather/issues"

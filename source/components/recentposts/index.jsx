@@ -21,7 +21,7 @@ const RecentPosts = ({ recent, minPlaceholder }) => {
     <FIcon
       className="f-recent-more"
       icon={IconFont.DOWN_ARROW}
-      url="/posts" link
+      url="/archive" link
     />
   </div>);
 };
