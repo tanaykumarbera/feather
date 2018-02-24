@@ -115,7 +115,7 @@ class FList extends React.Component {
   render() {
     const { posts, isLoading, hasMore } = this.props.list;
     const isTag = this.type === FList.Type.TAGS;
-    const navItem = isTag ? `#${this.props.match.params.slug}` : 'Archieve';
+    const navItem = isTag ? `#${this.props.match.params.slug}` : 'Archive';
     return (<SideBarPage author={this.props.author}>
       <Helmet>
         <title>{ `${navItem} - ${Config.BLOG_TITLE}` }</title>
