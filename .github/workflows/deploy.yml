@@ -1,0 +1,73 @@
+name: Build and Package Ghost Theme
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - refactor/modernize-ghost-theme
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    name: Build & Zip Theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Assets
+        run: npm run build
+
+      - name: Package Theme
+        id: package_theme
+        run: |
+          # Get version from package.json
+          VERSION=$(node -p "require('./package.json').version")
+          THEME_NAME=$(node -p "require('./package.json').name")
+          ZIP_NAME="${THEME_NAME}-${VERSION}.zip"
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_OUTPUT
+          
+          # Create temporary folder for packaging
+          mkdir -p dist_theme
+          
+          # Copy only theme-relevant files
+          # Handlebars files
+          cp *.hbs dist_theme/
+          # Essential configs
+          CP_FILES="package.json LICENSE README.md"
+          for file in $CP_FILES; do
+            if [ -f "$file" ]; then cp "$file" dist_theme/; fi
+          done
+          
+          # Assets (including built folder)
+          mkdir -p dist_theme/assets
+          cp -r assets/* dist_theme/assets/
+          
+          # Remove source mapping if any or unnecessary items from assets
+          # Note: assets/built is created by vite
+          
+          # Zip the contents of dist_theme
+          cd dist_theme
+          zip -r "../${ZIP_NAME}" .
+          cd ..
+
+      - name: Upload Theme Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: feather-theme
+          path: ${{ steps.package_theme.outputs.ZIP_NAME }}
+          if-no-files-found: error
+          retention-days: 7
