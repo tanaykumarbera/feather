@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
@@ -17,34 +19,34 @@ import './post.less';
 class FPost extends React.Component {
 
   static propTypes = {
-    match: React.PropTypes.shape({
-      params: React.PropTypes.shape({
-        slug: React.PropTypes.string
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        slug: PropTypes.string
       })
     }).isRequired,
-    fetchPost: React.PropTypes.func.isRequired,
-    fetchHomeContents: React.PropTypes.func.isRequired,
-    author: React.PropTypes.shape({
-      user: React.PropTypes.object,
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
+    fetchPost: PropTypes.func.isRequired,
+    fetchHomeContents: PropTypes.func.isRequired,
+    author: PropTypes.shape({
+      user: PropTypes.object,
+      isLoading: PropTypes.bool,
+      hasError: PropTypes.bool
     }),
-    active: React.PropTypes.shape({
-      post: React.PropTypes.shape({
-        title: React.PropTypes.string,
-        image: React.PropTypes.string,
-        meta: React.PropTypes.string,
-        tags: React.PropTypes.array
+    active: PropTypes.shape({
+      post: PropTypes.shape({
+        title: PropTypes.string,
+        image: PropTypes.string,
+        meta: PropTypes.string,
+        tags: PropTypes.array
       }),
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool,
-      errorCode: React.PropTypes.number
+      isLoading: PropTypes.bool,
+      hasError: PropTypes.bool,
+      errorCode: PropTypes.number
     }),
-    history: React.PropTypes.shape({
-      replace: React.PropTypes.func
+    history: PropTypes.shape({
+      replace: PropTypes.func
     }).isRequired,
-    location: React.PropTypes.shape({
-      hash: React.PropTypes.string
+    location: PropTypes.shape({
+      hash: PropTypes.string
     }).isRequired
   };
 
@@ -66,20 +68,25 @@ class FPost extends React.Component {
     'sub', 'sup', 'blockquote', 'pre', 'iframe'
   ]
 
-  componentWillMount() {
+  componentDidMount() {
     scrollToTop();
     if (!this.props.author.user) this.props.fetchHomeContents();
-    this.props.fetchPost(this.props.match.params.slug);
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.active.errorCode === 404) {
-      // post not found. Redirect to error page
-      this.props.history.replace('/error');
+    const slug = this.props.match?.params?.slug || this.props.params?.slug;
+
+    if (slug) {
+      this.props.fetchPost(slug);
+    } else {
+      console.error('FPost: slug is missing');
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (this.props.active.errorCode === 404 && prevProps.active.errorCode !== 404) {
+      // post not found. Redirect to error page
+      this.props.history.replace('/error');
+    }
+
     const { post, isLoading } = this.props.active;
     const postLoaded = !(isLoading || post === null);
     if (postLoaded && !this.hasDisqus) {
@@ -92,15 +99,14 @@ class FPost extends React.Component {
         document.getElementById('disqus_thread').scrollIntoView();
       }
     }
-    /* global Prism */
-    if (postLoaded && Prism) {
-      Prism.plugins.autoloader.languages_path = Config.PRISM_GRAMMER;
-      Prism.highlightAll();
+    if (postLoaded && window.Prism) {
+      window.Prism.plugins.autoloader.languages_path = Config.PRISM_GRAMMER;
+      window.Prism.highlightAll();
     }
   }
 
   addDisqus(pageUrl, pageIdentifier) {
-    window.disqus_config = () => {
+    window.disqus_config = function () {
       this.page.url = pageUrl;
       this.page.identifier = pageIdentifier;
     };
@@ -122,7 +128,7 @@ class FPost extends React.Component {
 
   render() {
     const { post, isLoading } = this.props.active;
-    const hasPost = !(isLoading || post === null);
+    const hasPost = !isLoading && post;
     return (<SideBarPage author={this.props.author}>
       <Helmet>
         <title>{hasPost ? `${post.title} - ${Config.BLOG_TITLE}` : Config.BLOG_TITLE}</title>
@@ -136,7 +142,7 @@ class FPost extends React.Component {
       >
         <h1 className="f-post-title" itemProp="headline">{post.title}</h1>
         <link itemProp="image" href={post.image} />
-        { post.tags && (<div className="f-post-tags">
+        {post.tags && (<div className="f-post-tags">
           <FIcon theme="f-dark" icon={IconFont.BUBBLE} />
           <meta name="keywords" content={post.tags.map(tag => tag.name).join(',')} />
           {post.tags.map(tag => (<FTag key={tag.id} tag={tag} />))}
@@ -148,7 +154,7 @@ class FPost extends React.Component {
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(post.html, {
               allowedAttributes: false,
-              allowedTags: this.allowedTags
+              allowedTags: FPost.allowedTags
             })
           }}
         />
@@ -177,6 +183,8 @@ class FPost extends React.Component {
   }
 }
 
+import { withRouter } from '../../utils/with-router';
+
 export default connect(state => state,
   dispatch => bindActionCreators({ fetchPost, fetchHomeContents }, dispatch)
-)(FPost);
+)(withRouter(FPost));

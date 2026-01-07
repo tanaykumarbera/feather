@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import FHome from '../containers/home';
 import FList from '../containers/list';
@@ -7,21 +7,26 @@ import FPost from '../containers/post';
 import FError from '../containers/error';
 
 const FRouter = () => {
-  const supportsHistory = 'pushState' in window.history;
+  // forceRefresh is no longer standard in v6 Browser Router same way, 
+  // but let's stick to standard usage. Modern browsers support history.
   return (
-    <BrowserRouter forceRefresh={!supportsHistory}>
+    <BrowserRouter>
       <div className="feather-wrap">
-        <Switch>
-          <Route exact path="/" component={FHome} />
-          <Route path="/archive" component={FList} bla="blue" />
+        <Routes>
+          <Route path="/" element={<FHome />} />
+          <Route path="/archive" element={<FList bla="blue" />} />
           <Route
             path="/tag/:slug"
-            render={routeProps => <FList {...routeProps} type="tags" />}
+            element={<FList type="tags" />}
           />
-          <Route path="/error" component={FError} />
-          <Route path="/:slug" component={FPost} />
-          <Redirect to="/error" />
-        </Switch>
+          <Route
+            path="/search/:slug"
+            element={<FList type="search" />}
+          />
+          <Route path="/error" element={<FError />} />
+          <Route path="/:slug" element={<FPost />} />
+          <Route path="*" element={<Navigate to="/error" replace />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

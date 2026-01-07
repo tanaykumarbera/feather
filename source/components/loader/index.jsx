@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './loader.less';
 
 const FLoader = ({ text, light }) => (<div className="f-loader-wrap">
@@ -7,7 +8,7 @@ const FLoader = ({ text, light }) => (<div className="f-loader-wrap">
     <span className="f-loader-item-2" />
     <span className="f-loader-item-3" />
   </div>
-  { text && <p>{ text }</p> }
+  {text && <p>{text}</p>}
 </div>);
 
 FLoader.propTypes = {

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import { generateInkRipple } from '../../utils';
@@ -9,14 +11,14 @@ export default class FTag extends React.Component {
 
   static LINK_DELAY = 650; // same as that of animation
   static propTypes = {
-    tag: React.PropTypes.shape({
-      name: React.PropTypes.string,
-      slug: React.PropTypes.string,
-      description: React.PropTypes.string,
-      meta_title: React.PropTypes.string,
-      meta_description: React.PropTypes.string
+    tag: PropTypes.shape({
+      name: PropTypes.string,
+      slug: PropTypes.string,
+      description: PropTypes.string,
+      meta_title: PropTypes.string,
+      meta_description: PropTypes.string
     }).isRequired,
-    onClick: React.PropTypes.func
+    onClick: PropTypes.func
   };
 
   static defaultProps = {

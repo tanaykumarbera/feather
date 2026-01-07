@@ -1,0 +1,74 @@
+@import (reference) "../../utils/global.less";
+
+.f-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2em 0;
+    margin: 0 -1em; // Negative margin to allow full bleed on small screens
+    -webkit-overflow-scrolling: touch;
+
+    // Hide scrollbar completely
+    scrollbar-width: none; // Firefox
+
+    &::-webkit-scrollbar {
+        display: none; // Chrome/Safari
+    }
+
+    .f-carousel-item {
+        flex: 0 0 auto;
+        width: 280px;
+        margin: 0 0.5em;
+        scroll-snap-align: center;
+        position: relative;
+        border-radius: 3px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0px 0px 2px 0px #CCC;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 0px 6px 0px #AAA;
+        }
+
+        .f-card-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .f-card-content {
+            padding: 1.2em;
+
+            .f-card-title {
+                font-size: 1.1em;
+                font-weight: 700;
+                margin: 0 0 0.5em 0;
+                line-height: 1.4;
+                color: @titleColor;
+
+                // Truncate to 2 lines
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .f-card-meta {
+                font-size: 0.85em;
+                color: @fontColorLight;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1em;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}
