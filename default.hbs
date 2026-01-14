@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    {{!-- Document Settings --}}
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  {{!-- Document Settings --}}
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    {{!-- Page Meta --}}
-    <title>{{meta_title}}</title>
+  {{!-- Page Meta --}}
+  <title>{{meta_title}}</title>
 
-    {{!-- Mobile Meta --}}
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{!-- Mobile Meta --}}
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {{!-- Brand icon --}}
-    <link rel="shortcut icon" href="{{asset "favicon.ico"}}">
+  {{!-- Brand icon --}}
+  <link rel="shortcut icon" href="{{asset " favicon.ico"}}">
 
-    {{!-- Styles code-highlighter, theme styles --}}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{asset "built/feather.css"}}" />
+  {{!-- Styles code-highlighter, theme styles --}}
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{asset " built/feather.css"}}" />
 
-    {{!-- Ghost outputs important style and meta data with this tag --}}
-    {{ghost_head}}
+  {{!-- Ghost outputs important style and meta data with this tag --}}
+  {{ghost_head}}
+
+  <script>
+    window.GHOST_CONFIG = {
+      url: "{{@site.url}}",
+      key: "{{@custom.content_api_key}}",
+      title: "{{@site.title}}"
+    };
+  </script>
 </head>
+
 <body class="{{body_class}} nav-closed">
-    {{!-- We will use feather-contents to render out client --}}
-    <div class="feather-contents">
+  {{!-- We will use feather-contents to render out client --}}
+  <div class="feather-contents">
 
-        {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
-        {{{body}}}
-    </div>
+    {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+    {{{body}}}
+  </div>
 
-    {{!-- Ghost outputs important scripts and data with this tag --}}
-    {{ghost_foot}}
+  {{!-- Ghost outputs important scripts and data with this tag --}}
+  {{ghost_foot}}
 
-    {{!-- Scripts --}}
-    <script type="text/javascript" src="{{asset "built/feather.js"}}"></script>
-    {{!-- Load code highlighter scripts--}}
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-core.js">
-    </script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/autoloader/prism-autoloader.min.js">
+  {{!-- Scripts --}}
+  <script type="text/javascript" src="{{asset " built/feather.js"}}"></script>
+  {{!-- Load code highlighter scripts--}}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-core.js">
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/autoloader/prism-autoloader.min.js">
     </script>
 </body>
+
 </html>
