@@ -18,7 +18,7 @@ import { fetchPosts, fetchHomeContents, searchPosts } from '../../actions';
 
 import './list.less';
 import '../error/error.less';
-// move default css from home to base <<<<<<<<
+
 class FList extends React.Component {
 
   static Type = {
