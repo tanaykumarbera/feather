@@ -1,5 +1,5 @@
 const Config = {
-  BLOG_TITLE: 'blog.tanay.co',
+  BLOG_TITLE: window.GHOST_CONFIG?.title || 'blog.tanay.co',
   BLOG_DISQUS: 'https://tanay.disqus.com/embed.js',
   PRISM_GRAMMER: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/',
   BLOG_PUBLISHER: 'tanay.co',
