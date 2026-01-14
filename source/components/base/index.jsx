@@ -1,23 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { fetchPosts } from '../../actions';
 
-require('./base.less');
+import './base.less';
 
 class Comp extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    fetchPosts: React.PropTypes.func.isRequired,
-    isLoading: React.PropTypes.bool.isRequired
+    children: PropTypes.node,
+    fetchPosts: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired
   }
   static defaultProps = {
     children: '',
     fetchPosts: null,
     isLoading: false
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts();
   }
   render() {
@@ -25,9 +27,9 @@ class Comp extends React.Component {
       <h1>Loading...</h1>
     ) : (
       <div>
-        { JSON.stringify(this.props) }
+        {JSON.stringify(this.props)}
         <br />
-        { this.props.children }
+        {this.props.children}
       </div>
     );
   }

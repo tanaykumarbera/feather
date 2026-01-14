@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 import FTag from '../tag';
@@ -13,14 +15,14 @@ const src = '/assets/images/sample.png';
 export default class PostListItem extends React.Component {
 
   static propTypes = {
-    post: React.PropTypes.shape({
-      title: React.PropTypes.string,
-      image: React.PropTypes.string,
-      feature_image: React.PropTypes.string,
-      meta: React.PropTypes.string,
-      tags: React.PropTypes.array
+    post: PropTypes.shape({
+      title: PropTypes.string,
+      image: PropTypes.string,
+      feature_image: PropTypes.string,
+      meta: PropTypes.string,
+      tags: PropTypes.array
     }),
-    index: React.PropTypes.number
+    index: PropTypes.number
   };
 
   static defaultProps = {
@@ -52,14 +54,14 @@ export default class PostListItem extends React.Component {
             className="post-title"
             itemProp="headline"
           >
-            { post.title }
+            {post.title}
           </h2>
         </Link>
         <div
           className="post-excerpt"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(post.html, {
+            __html: sanitizeHtml(post.html || post.excerpt, {
               allowedTags: ['p', 'b', 'i', 'strong']
             })
           }}

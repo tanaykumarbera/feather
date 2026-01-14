@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import throttle from 'lodash.throttle';
 
 import './autotriggerscroll.less';
@@ -9,10 +11,10 @@ class AutoTriggerScroll extends React.Component {
   static TRIGGER_HEIGHT = 300;
 
   static propTypes = {
-    isLoading: React.PropTypes.bool.isRequired,
-    hasMore: React.PropTypes.bool.isRequired,
-    trigger: React.PropTypes.func.isRequired,
-    children: React.PropTypes.node.isRequired
+    isLoading: PropTypes.bool.isRequired,
+    hasMore: PropTypes.bool.isRequired,
+    trigger: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired
   };
 
   constructor(props) {
@@ -53,21 +55,26 @@ class AutoTriggerScroll extends React.Component {
     this.isPortrait = window.innerWidth < 986;
     this.scrollTarget = this.isPortrait ? document.getElementsByClassName('f-page')[0]
       : document.getElementById('f-auto-scroll');
+
     if (oldScrollTarget !== undefined) {
       if (oldScrollTarget !== this.scrollTarget) {
         // reassignment - as scroll target may change.
         oldScrollTarget.removeEventListener('scroll', this.onScroll);
-        this.scrollTarget.addEventListener('scroll', this.onScroll);
-      } // else same. no need to remove or modify
+        if (this.scrollTarget) {
+          this.scrollTarget.addEventListener('scroll', this.onScroll);
+        }
+      }
     } else {
       // first time assignment
-      this.scrollTarget.addEventListener('scroll', this.onScroll);
+      if (this.scrollTarget) {
+        this.scrollTarget.addEventListener('scroll', this.onScroll);
+      }
     }
   }
 
   render() {
     return (<div id="f-auto-scroll">
-      { this.props.children }
+      {this.props.children}
     </div>);
   }
 }

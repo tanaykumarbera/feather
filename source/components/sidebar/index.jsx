@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 import SiteLogo from '../../components/sitelogo';
 import AuthorBio from '../../components/authorbio';
@@ -26,10 +28,10 @@ const SideBar = ({ author }) => (
 );
 
 SideBar.propTypes = {
-  author: React.PropTypes.shape({
-    user: React.PropTypes.object,
-    isLoading: React.PropTypes.bool,
-    hasError: React.PropTypes.bool
+  author: PropTypes.shape({
+    user: PropTypes.object,
+    isLoading: PropTypes.bool,
+    hasError: PropTypes.bool
   }).isRequired
 };
 

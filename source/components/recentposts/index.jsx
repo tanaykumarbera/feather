@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import FIcon from '../icon';
 import PostListItem from '../postlistitem';
 import { IconFont } from '../../utils';
@@ -27,11 +29,11 @@ const RecentPosts = ({ recent, minPlaceholder }) => {
 };
 
 RecentPosts.propTypes = {
-  recent: React.PropTypes.shape({
-    posts: React.PropTypes.array,
-    hasError: React.PropTypes.bool
+  recent: PropTypes.shape({
+    posts: PropTypes.array,
+    hasError: PropTypes.bool
   }).isRequired,
-  minPlaceholder: React.PropTypes.number.isRequired
+  minPlaceholder: PropTypes.number.isRequired
 };
 
 export default RecentPosts;

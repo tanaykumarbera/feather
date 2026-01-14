@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -20,16 +22,16 @@ import './home.less';
 class FHome extends React.Component {
 
   static propTypes = {
-    fetchHomeContents: React.PropTypes.func.isRequired,
-    author: React.PropTypes.shape({
-      user: React.PropTypes.object,
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
+    fetchHomeContents: PropTypes.func.isRequired,
+    author: PropTypes.shape({
+      user: PropTypes.object,
+      isLoading: PropTypes.bool,
+      hasError: PropTypes.bool
     }).isRequired,
-    recent: React.PropTypes.shape({
-      posts: React.PropTypes.array,
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
+    recent: PropTypes.shape({
+      posts: PropTypes.array,
+      isLoading: PropTypes.bool,
+      hasError: PropTypes.bool
     }).isRequired
   };
 
@@ -39,7 +41,7 @@ class FHome extends React.Component {
     this.toggleSearch = this.toggleSearch.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.props.author.user) {
       this.props.fetchHomeContents();
     }
@@ -60,7 +62,7 @@ class FHome extends React.Component {
     }
     return (<div className="f-page f-home parallax">
       <Helmet>
-        <title>{ `Home - ${Config.BLOG_TITLE}` }</title>
+        <title>{`Home - ${Config.BLOG_TITLE}`}</title>
       </Helmet>
       <div className="f-background parallax-layer parallax-layer-background">
         <div className="f-abstract-1" />
@@ -90,7 +92,7 @@ class FHome extends React.Component {
           />
         </footer>
       </div>
-      { this.state.searchActive && <FSearch close={() => this.toggleSearch()} /> }
+      {this.state.searchActive && <FSearch close={() => this.toggleSearch()} />}
     </div>);
   }
 }

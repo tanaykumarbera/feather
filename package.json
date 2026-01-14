@@ -1,12 +1,14 @@
 {
   "name": "feather",
-  "version": "0.0.1",
-  "description": "An experimental ghost theme",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Ghost theme built with React 18 and Vite",
   "main": "index.js",
   "scripts": {
-    "build:client": "webpack",
-    "build:client:production": "NODE_ENV='production' webpack --progress -p",
-    "build": "npm run build:client"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint source --ext .js,.jsx"
   },
   "repository": {
     "type": "git",
@@ -15,7 +17,8 @@
   "keywords": [
     "ghost",
     "react",
-    "ghost-theme"
+    "ghost-theme",
+    "vite"
   ],
   "author": {
     "email": "tanaykumarbera@gmail.com"
@@ -26,41 +29,27 @@
   },
   "homepage": "https://github.com/tanaykumarbera/feather#readme",
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
-    "babel-core": "^6.24.0",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.4.1",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-1": "^6.22.0",
-    "css-loader": "^0.27.3",
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-loader": "^1.6.3",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.2",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "less": "^2.7.2",
-    "less-loader": "^3.0.0",
-    "less-plugin-group-css-media-queries": "^1.1.1",
-    "postcss-loader": "^1.3.3",
-    "style-loader": "^0.14.1",
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^2.2.1"
+    "@tryghost/content-api": "^1.11.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "less": "^4.5.1",
+    "vite": "^5.0.0"
   },
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^1.6.0",
     "lodash.throttle": "^4.1.1",
-    "react": "^15.4.2",
-    "react-addons-css-transition-group": "^15.6.0",
-    "react-dom": "^15.4.2",
-    "react-helmet": "^5.1.3",
-    "react-redux": "^5.0.3",
-    "react-router-dom": "^4.0.0",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0",
-    "sanitize-html": "^1.14.1"
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-redux": "^8.1.0",
+    "react-router-dom": "^6.20.0",
+    "react-transition-group": "^4.4.5",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.0",
+    "sanitize-html": "^2.11.0"
   }
 }

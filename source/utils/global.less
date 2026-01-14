@@ -9,22 +9,26 @@
 @codeBg: #F6F6F6;
 @inlineCodeColor: #DD4343;
 
-@import url('https://fonts.googleapis.com/css?family=Quattrocento');
+
 
 * {
   font-family: 'Quattrocento', serif;
 }
 
-code *, pre * {
+code *,
+pre * {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: 0.9em;
 }
 
-code, pre, :not(pre) > code[class*=language-], pre[class*=language-] {
+code,
+pre,
+:not(pre)>code[class*=language-],
+pre[class*=language-] {
   background-color: @codeBg;
 }
 
-:not(pre) > code {
+:not(pre)>code {
   color: @inlineCodeColor;
   padding: 0 0.24em;
 }
@@ -34,7 +38,11 @@ pre[class*=language-] {
   margin: 0;
 }
 
-html, body, .feather-wrap, .feather-contents, .f-page {
+html,
+body,
+.feather-wrap,
+.feather-contents,
+.f-page {
   width: 100%;
   height: 100%;
 }
@@ -73,11 +81,15 @@ html, body, .feather-wrap, .feather-contents, .f-page {
     background: @selection;
   }
 
-  &:before, &:after, *, *:before, *:after {
+  &:before,
+  &:after,
+  *,
+  *:before,
+  *:after {
     text-shadow: none;
   }
 
-  &:visited{
+  &:visited {
     color: @text;
   }
 }
@@ -88,12 +100,14 @@ html, body, .feather-wrap, .feather-contents, .f-page {
 .paper {
   position: relative;
   overflow: hidden;
+
   .ink {
     display: block;
     position: absolute;
     background: #CCC;
     border-radius: 100%;
     transform: scale(0);
+
     &.animate {
       animation: ripple 0.5s linear;
     }
@@ -101,42 +115,60 @@ html, body, .feather-wrap, .feather-contents, .f-page {
 }
 
 @keyframes ripple {
-	100% {
+  100% {
     opacity: 0;
     transform: scale(2.5);
   }
 }
 
 .DEVICE_XTRALARGER(@rules) {
-  @media (min-width : 1824px) { @rules(); }
+  @media (min-width : 1824px) {
+    @rules();
+  }
 }
 
 .DEVICE_DESKTOPS(@rules) {
-  @media (max-width: 1824px) { @rules(); }
+  @media (max-width: 1824px) {
+    @rules();
+  }
 }
 
 .DEVICE_LAPTOPS(@rules) {
-  @media (max-width: 1224px) { @rules(); }
+  @media (max-width: 1224px) {
+    @rules();
+  }
 }
 
 .DEVICE_TABLETS(@rules) {
-  @media (max-width: 1024px) { @rules(); }
+  @media (max-width: 1024px) {
+    @rules();
+  }
 }
 
 .DEVICE_PORTRAIT(@rules) {
-  @media (orientation: portrait), (max-width: 986px) { @rules(); }
+
+  @media (orientation: portrait),
+  (max-width: 986px) {
+    @rules();
+  }
 }
 
 .DEVICE_SMALL(@rules) {
-  @media (max-width: 800px) { @rules(); }
+  @media (max-width: 800px) {
+    @rules();
+  }
 }
 
 .DEVICE_MOBILE(@rules) {
-  @media (max-width: 480px) { @rules(); }
+  @media (max-width: 480px) {
+    @rules();
+  }
 }
 
 .DEVICE_RETINA(@rules) {
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi) {
     @rules();
   }
 }

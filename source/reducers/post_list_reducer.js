@@ -4,7 +4,9 @@ import INITIAL_STATE from '../feather_initial';
 export default function (currentState = INITIAL_STATE.list, action) {
   switch (action.type) {
     case FETCH_POSTS: {
-      const { pages: totalPages, page: pageLoaded } = action.payload.meta.pagination;
+      const meta = action.payload.meta || {};
+      const pagination = meta.pagination || { pages: 0, page: 0 };
+      const { pages: totalPages, page: pageLoaded } = pagination;
       return {
         totalPages,
         pageLoaded,
@@ -27,9 +29,7 @@ export default function (currentState = INITIAL_STATE.list, action) {
           posts: (currentState.identifier === action.identifier) ? currentState.posts : [],
           isLoading: (action.type === LOADING),
           hasError: (action.type === API_ERROR),
-          errorCode: action.payload.error
-            ? action.payload.error.response.status
-            : undefined
+          errorCode: action.payload.error?.response?.status
         };
       }
       break;

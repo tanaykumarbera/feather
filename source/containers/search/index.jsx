@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 import sanitizeHtml from 'sanitize-html';
 // import { Helmet } from "react-helmet";
@@ -12,11 +14,11 @@ import './search.less';
 class FSearch extends React.Component {
 
   static propTypes = {
-    close: React.PropTypes.func.isRequired,
-    searchList: React.PropTypes.shape({
-      posts: React.PropTypes.array,
-      isLoading: React.PropTypes.bool,
-      hasError: React.PropTypes.bool
+    close: PropTypes.func.isRequired,
+    searchList: PropTypes.shape({
+      posts: PropTypes.array,
+      isLoading: PropTypes.bool,
+      hasError: PropTypes.bool
     })
   };
 

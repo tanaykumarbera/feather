@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const AuthorBio = ({ author, theme }) => (
   <p className={`f-author-bio ${theme}`}>
-    { author.user && author.user.bio }
+    {author.user && author.user.bio}
   </p>
 );
 

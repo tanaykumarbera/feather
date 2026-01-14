@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import SideBar from '../sidebar';
 
@@ -7,7 +8,7 @@ import './sidebarpage.less';
 const SideBarPage = ({ author, children }) => (
   <div className="f-page f-sidebar-page">
     <div className="f-sp-contents">
-      { children }
+      {children}
     </div>
     <SideBar author={author} />
   </div>
@@ -19,7 +20,7 @@ SideBarPage.propTypes = {
     hasError: PropTypes.bool,
     bio: PropTypes.string
   }).isRequired,
-  children: React.PropTypes.node.isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default SideBarPage;
