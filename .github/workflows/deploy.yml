@@ -35,8 +35,11 @@ jobs:
       - name: Determine Next Version
         id: versioning
         run: |
-          # Fetch the latest release tag robustly using JSON
-          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
+          # Ensure tags are fetched
+          git fetch --tags --force
+          
+          # Try to get the latest tag from git first, then fallback to GH release
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || gh release list --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
           
           # Validation: Ensure it matches vX.Y.Z
           if [[ "$LATEST_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -47,12 +50,12 @@ jobs:
             # Increment patch
             NEW_PATCH=$((patch + 1))
             NEW_TAG="v${major}.${minor}.${NEW_PATCH}"
-            echo "Found latest release $LATEST_TAG. Incrementing to $NEW_TAG"
+            echo "Found latest tag/release $LATEST_TAG. Incrementing to $NEW_TAG"
           else
-            # No valid previous release found, use version from package.json
+            # No valid previous tag/release found, use version from package.json
             VERSION=$(node -p "require('./package.json').version")
             NEW_TAG="v${VERSION}"
-            echo "No valid previous release found (got: '$LATEST_TAG'). Using package.json version: $NEW_TAG"
+            echo "No valid previous version found (got: '$LATEST_TAG'). Using package.json version: $NEW_TAG"
           fi
           
           echo "NEW_TAG=${NEW_TAG}" >> $GITHUB_OUTPUT
