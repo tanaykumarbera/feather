@@ -35,17 +35,12 @@ jobs:
       - name: Determine Next Version
         id: versioning
         run: |
-          # Fetch the latest release tag (formatted as vX.Y.Z)
-          LATEST_TAG=$(gh release list --limit 1 | awk '{print $1}' || echo "")
+          # Fetch the latest release tag robustly using JSON
+          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
           
-          if [ -z "$LATEST_TAG" ]; then
-            # No releases yet, use version from package.json
-            VERSION=$(node -p "require('./package.json').version")
-            NEW_TAG="v${VERSION}"
-            echo "No previous release found. Using package.json version: $NEW_TAG"
-          else
-            # Extract parts from tag (assuming v1.0.0 format)
-            # Remove 'v' if present
+          # Validation: Ensure it matches vX.Y.Z
+          if [[ "$LATEST_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            # Extract parts from tag
             CLEAN_TAG=${LATEST_TAG#v}
             IFS='.' read -r major minor patch <<< "$CLEAN_TAG"
             
@@ -53,6 +48,11 @@ jobs:
             NEW_PATCH=$((patch + 1))
             NEW_TAG="v${major}.${minor}.${NEW_PATCH}"
             echo "Found latest release $LATEST_TAG. Incrementing to $NEW_TAG"
+          else
+            # No valid previous release found, use version from package.json
+            VERSION=$(node -p "require('./package.json').version")
+            NEW_TAG="v${VERSION}"
+            echo "No valid previous release found (got: '$LATEST_TAG'). Using package.json version: $NEW_TAG"
           fi
           
           echo "NEW_TAG=${NEW_TAG}" >> $GITHUB_OUTPUT
